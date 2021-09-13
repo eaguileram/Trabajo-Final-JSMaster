@@ -3,7 +3,7 @@ Fecha límite entrega:  25 de Septiembre 2021<br/>
 Forma de entrega: Link a repositorio Github con el proyecto, el link debe ser entregado mediante Classroom en la actividad creada para este fin.<br/>
 
 
-Descripción general del proyecto<br />
+## Descripción general del proyecto<br />
 
 Se debe realizar en modo SPA (Single Page Application) una tienda de comercio electrónico con las siguientes características:<br />
 Se debe utilizar HTML, CSS y Javascript o Typescript, no se permitirá el uso de frameworks (React, Angular u otro).<br />
