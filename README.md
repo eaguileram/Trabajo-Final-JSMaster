@@ -1,4 +1,4 @@
-## Tiempo de desarrollo: 4 semanas
+# Tiempo de desarrollo: 4 semanas.
 ## Fecha límite entrega:  25 de Septiembre 2021
 ## Forma de entrega: Link a repositorio Github con el proyecto, el link debe ser entregado mediante Classroom en la actividad creada para este fin.
 
