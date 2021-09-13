@@ -39,4 +39,6 @@ Máximo puntaje posible a obtener 140 puntos<br />
 Nivel de exigencia para aprobación 60%<br />
 Puntaje mínimo para aprobación 83 puntos<br />
 
-Se añade vista esquemática del proyecto, esto es solo a modo de recomendación y aclaración.<br />
+Se añade vista esquemática del proyecto, esto es solo a modo de recomendación y aclaración.<br /><br/>
+
+![Screenshot] (layout.png)
