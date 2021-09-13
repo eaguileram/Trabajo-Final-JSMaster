@@ -41,4 +41,4 @@ Puntaje mínimo para aprobación 83 puntos<br />
 
 Se añade vista esquemática del proyecto, esto es solo a modo de recomendación y aclaración.<br /><br/>
 
-![Screenshot] (./layout.png)
+![Screenshot](./layout.png)
