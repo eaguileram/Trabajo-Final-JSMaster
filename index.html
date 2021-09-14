@@ -41,29 +41,69 @@
       }
 
       .producto{
-        height: 200px;
+        height: 400px;
         background-color: #fff;
         padding: 1em;
         margin: 1em;
-        
+        border: 3px;
+        line-height: 1.6;
       }
+      img{
+        width:  200px;
+        height: 200px;
+      }
+      
+      figcaption{
+        text-transform: uppercase;
+        font-weight: 500;
+      }
+
+      .precio{
+        color:#0123ff;
+        font-weight: 900;
+      }
+      
+      .stock{
+        color: #acabab;
+        font-size: 0.9em;
+        font-weight: 300;
+      }
+
+      .encarrito{
+        color: #acabab;
+        font-size: 0.9em;
+        font-weight: 300;
+      }
+
+      button{
+        margin-top: 10px;
+        margin-bottom: 10px;
+      }
+      .btnagregar{
+        background-color: #0123ff;
+        color: #fff;
+        border: 1px solid #0123ff;
+        font-size: 1em;
+        font-weight: 700;
+        border-radius: 50px;
+        padding: 10px;
+        min-width: 65%;
+      }
+      @media (min-width: 2000px) { article{ grid-template-columns: 1fr 1fr 1fr 1fr;} }
+      @media (max-width: 1500px) { article{ grid-template-columns: 1fr 1fr;} }
+      @media (max-width: 1200px) { article{ grid-template-columns: 1fr} }
+      @media (max-width: 1200px) { article{ grid-template-columns: 1fr}  .producto{ height: 450px;} }
     </style>
 </head>
 <body>
   <div class="grid">
     <article>
-      <section class="producto">1</section>
-      <section class="producto">2</section>
-      <section class="producto">3</section>
-      <section class="producto">1</section>
-      <section class="producto">2</section>
-      <section class="producto">3</section>
-      <section class="producto">1</section>
-      <section class="producto">2</section>
-      <section class="producto">3</section>
-      <section class="producto">1</section>
-      <section class="producto">2</section>
-      <section class="producto">3</section>
+      <section class="producto"><figure><img src="img/s1.jpg" /><figcaption>Silla Gamer Color Rojo</figcaption></figure><span class="precio">$249.990</span>   <br/><span class="stock">5 unidades disponibles</span><br/><button class="btnagregar">Añadir a Compra</button><br/><span class="encarrito">Tienes 0 unidades en el carro de compra</span></section>
+      <section class="producto"><figure><img src="img/s2.jpg" /><figcaption>Silla Gamer Color Celeste</figcaption></figure><span class="precio">$169.900</span><br/><span class="stock">5 unidades disponibles</span><br/><button class="btnagregar">Añadir a Compra</button><br/><span class="encarrito">Tienes 0 unidades en el carro de compra</span></section>
+      <section class="producto"><figure><img src="img/s3.jpg" /><figcaption>Silla Gamer Color Rosada</figcaption></figure><span class="precio">$134.990</span> <br/><span class="stock">5 unidades disponibles</span><br/><button class="btnagregar">Añadir a Compra</button><br/><span class="encarrito">Tienes 0 unidades en el carro de compra</span></section>
+      <section class="producto"><figure><img src="img/s4.jpg" /><figcaption>Silla Gamer Color Blanca</figcaption></figure><span class="precio">$159.990</span> <br/><span class="stock">5 unidades disponibles</span><br/><button class="btnagregar">Añadir a Compra</button><br/><span class="encarrito">Tienes 0 unidades en el carro de compra</span></section>
+      <section class="producto"><figure><img src="img/s5.jpg" /><figcaption>Silla Gamer Color Azul</figcaption></figure><span class="precio">$149.990</span>   <br/><span class="stock">5 unidades disponibles</span><br/><button class="btnagregar">Añadir a Compra</button><br/><span class="encarrito">Tienes 0 unidades en el carro de compra</span></section>
+      <section class="producto"><figure><img src="img/s6.jpg" /><figcaption>Silla Gamer Color Verde</figcaption></figure><span class="precio">$119.990</span>  <br/><span class="stock">5 unidades disponibles</span><br/><button class="btnagregar">Añadir a Compra</button><br/><span class="encarrito">Tienes 0 unidades en el carro de compra</span></section>
     </article>
     
     
