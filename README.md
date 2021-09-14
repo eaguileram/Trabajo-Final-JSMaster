@@ -48,6 +48,9 @@ Se añade vista esquemática del proyecto, esto es solo a modo de recomendación
 
 - [x] ~~Documento HTML5~~
   - [x] ~~FONTS~~
+  - [x] ~~Estructura GRID~~
+    - [x] ~~ARTICLE~~
+    - [x] ~~ASIDE~~
 - [x] ~~DIV GRID Article~~
   - [x] ~~Productos GRID~~ 
   - [x] ~~Imagen~~
