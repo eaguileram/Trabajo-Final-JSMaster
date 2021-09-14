@@ -47,7 +47,15 @@ Se añade vista esquemática del proyecto, esto es solo a modo de recomendación
 ## Semántica WEB HTML5
 
 - [x] ~~Documento HTML5~~
+  - [x] ~~FONTS~~
 - [x] ~~DIV GRID Article~~
+  - [x] ~~Productos GRID~~ 
+  - [x] ~~Imagen~~
+  - [x] ~~Título~~
+  - [x] ~~Precio~~
+  - [x] ~~Stocḳ~~
+  - [x] ~~Botón de compra~~
+  - [x] ~~Estado pedido~~
 - [x] ~~ASIDE~~
   - [ ] Crear Login
   - [ ] Crear Empy Cart
@@ -57,7 +65,6 @@ Se añade vista esquemática del proyecto, esto es solo a modo de recomendación
 
 ## CSS3
 - [x] ~~GRID~~
-- [x] ~~FONTS~~
 - [x] ~~COLORES~~
 - [x] ~~Media Responsive~~
 
