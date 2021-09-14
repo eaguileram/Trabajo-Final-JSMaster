@@ -42,3 +42,22 @@ Puntaje mínimo para aprobación 83 puntos<br />
 Se añade vista esquemática del proyecto, esto es solo a modo de recomendación y aclaración.<br /><br/>
 
 ![Screenshot](./layout.png)
+
+## TODO
+## Semántica WEB HTML5
+
+- [x] ~~Documento HTML5 ~~
+- [x] ~~DIV GRID Article~~
+- [x] ~~ASIDE~~
+- [] Crear Login
+- [] Crear Empy Cart
+- [] Crear Cart
+- [] Crear Botón Comprar
+- [] Crear mensaje compra 
+
+## CSS3
+- [x] ~~GRID~~
+- [x] ~~FONTS~~
+- [x] ~~COLORES~~
+- [x] ~~Media Responsive~~
+
