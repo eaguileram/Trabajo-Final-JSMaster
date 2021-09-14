@@ -44,7 +44,7 @@ Se añade vista esquemática del proyecto, esto es solo a modo de recomendación
 ![Screenshot](./layout.png)
 
 ## TODO
-## Semántica WEB HTML5
+## HTML5 / CSS3
 
 - [x] ~~Documento HTML5~~
   - [x] ~~FONTS~~
