@@ -60,11 +60,22 @@ Se añade vista esquemática del proyecto, esto es solo a modo de recomendación
   - [x] ~~Botón de compra~~
   - [x] ~~Estado pedido~~
 - [x] ~~ASIDE~~
-  - [ ] Crear Login
-  - [ ] Crear Empy Cart
-  - [ ] Crear Cart
-  - [ ] Crear Botón Comprar
-  - [ ] Crear mensaje compra 
+  - [ ] Crear Caja Login
+    - [ ] Crear Login
+  - [ ] Crear Caja Carrito Vacío
+    - [ ] Crear Empy Cart
+  - [ ] Crear Caja Carrito Compra
+    - [ ] Crear Cart
+    - [ ] Crear Botón Comprar
+    - [ ] Crear mensaje compra 
+  - [ ] Crear Caja Desarrollo
+    - [ ] Crear datos desarrollo
+    - [ ] Crear botón restaurar productos
+  
+  
+  
+  
+  
 
 ## CSS3
 - [x] ~~GRID~~
