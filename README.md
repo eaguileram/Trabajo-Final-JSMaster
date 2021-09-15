@@ -10,10 +10,10 @@ Se debe realizar en modo SPA (Single Page Application) una tienda de comercio el
 ~~En caso de estar realizado en Typescript no debe incluir los archivos compilados a JS.~~<br />
 ~~El proyecto solo debe contener 1 archivo html (index.html).~~<br />
 El usuario debe ser capaz de ver una variedad de productos y añadirlos a un carro de compra.<br />
-El usuario debe poder autenticarse, la validación debe ser estática y se debe aclarar cuál será el usuario y contraseña para uso del ejercicio.<br />
+El usuario debe poder autenticarse, la validación debe ser estática ~~y se debe aclarar cuál será el usuario y contraseña para uso del ejercicio.~~<br />
 La posibilidad de iniciar sesión no debe estar disponible si el usuario ha iniciado sesión, y en ese caso debe mostrar el nombre del usuario.<br />
 La cuenta de usuario no debe persistir cuando el usuario sale del sitio (cierra la pestaña o cierra el navegador).<br />
-Cada producto debe tener 1 imagen, 1 título, 1 precio y stock disponible (entre 1 y 5 unidades).<br />
+~~Cada producto debe tener 1 imagen, 1 título, 1 precio y stock disponible (entre 1 y 5 unidades).~~<br />
 Cada producto debe indicar si ese producto se encuentra  en el carro de compras y en qué cantidad, permitiendo añadir más del mismo ítem.<br />
 El usuario no debe ser capaz de solicitar una cantidad mayor a la disponible.<br />
 El stock de productos debe persistir ante la recarga de la página y si el usuario sale del sitio.<br />
@@ -68,6 +68,8 @@ Se añade vista esquemática del proyecto, esto es solo a modo de recomendación
   - [x] Crear Caja Carrito Compra
     - [x] ~~Crear Cart~~
     - [x] ~~Crear detalle compra~~
+    - [x] ~~Crear botón eliminar artículo~~
+      - [ ] Crear botones aumentar, disminuir cantidad
     - [x] ~~Crear Botón Comprar~~
     - [x] ~~Crear mensaje compra~~
   - [x] Crear Caja Desarrollo
