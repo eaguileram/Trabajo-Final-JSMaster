@@ -65,11 +65,11 @@ Se añade vista esquemática del proyecto, esto es solo a modo de recomendación
     - [X] ~~Crear Login~~
   - [x] ~~Crear Caja Carrito Vacío~~
     - [x] ~~Crear Empy Cart~~
-  - [ ] Crear Caja Carrito Compra
-    - [x] Crear Cart
-    - [ ] Crear detalle compra
-    - [ ] Crear Botón Comprar
-    - [ ] Crear mensaje compra 
+  - [x] Crear Caja Carrito Compra
+    - [x] ~~Crear Cart~~
+    - [x] ~~Crear detalle compra~~
+    - [x] ~~Crear Botón Comprar~~
+    - [x] ~~Crear mensaje compra~~
   - [ ] Crear Caja Desarrollo
     - [ ] Crear datos desarrollo
     - [ ] Crear botón restaurar productos
