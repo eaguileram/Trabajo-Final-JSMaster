@@ -60,25 +60,32 @@ Se añade vista esquemática del proyecto, esto es solo a modo de recomendación
   - [x] ~~Botón de compra~~
   - [x] ~~Estado pedido~~
 - [x] ~~ASIDE~~
-  - [ ] Crear Caja Login
-    - [ ] Crear Login
-  - [ ] Crear Caja Carrito Vacío
-    - [ ] Crear Empy Cart
+  - [x] ~~Crear Caja Login~~
+    - [x] ~~Crear usuario logueado~~
+    - [X] ~~Crear Login~~
+  - [x] ~~Crear Caja Carrito Vacío~~
+    - [x] ~~Crear Empy Cart~~
   - [ ] Crear Caja Carrito Compra
-    - [ ] Crear Cart
+    - [x] Crear Cart
+    - [ ] Crear detalle compra
     - [ ] Crear Botón Comprar
     - [ ] Crear mensaje compra 
   - [ ] Crear Caja Desarrollo
     - [ ] Crear datos desarrollo
     - [ ] Crear botón restaurar productos
-  
-  
-  
-  
-  
 
 ## CSS3
 - [x] ~~GRID~~
+  - [x] ~~Grid Cajas Aside~~
 - [x] ~~COLORES~~
+  - [x] ~~Bordes Input~~
+  - [x] ~~Bordes Icon~~
+  - [x] ~~Eliminar border input selected~~
+  - [X] ~~Agregar clase color azul icon input selected~~
 - [x] ~~Media Responsive~~
+
+## JS
+- [ ] Eventos
+  - [x] ~~Cambiar color icon user y pass onclick~~
+  - [X] ~~setear default color si hace click fuera de los input~~
 
