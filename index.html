@@ -571,15 +571,15 @@
                 </div>
                 <!--Block-->
                 <div class="login-block">
-                    <img src="img/elie.jpg" data-demo-src="assets/img/avatars/elie.jpg" alt="">
+                    <img id="imgDev" src="img/elie.jpg" data-demo-src="img/elie.jpg" alt="">
                     <div class="meta">
                         <span>
                                 <label class="flbl">Email: </label>
-                                <span >elie@mail.com</span><br />
+                                <span id="emailTxt" >elie@mail.com</span><br />
                         </span>
                         <span>
                                 <label class="flbl">Password: </label>
-                                <span >testpassword</span>
+                                <span id="passTxt">testpassword</span>
                         </span>
                         
                     </div>
@@ -597,13 +597,19 @@
     </aside>
   </div>
    <script>
-
+    
     let inuser = document.getElementById('inuser');
     let inpass = document.getElementById('inpass');
+    let emailtxt = document.getElementById('emailTxt');
+    let imgdev = document.getElementById('imgDev');
+    let passtxt = document.getElementById('passTxt');
 
     document.addEventListener('click', function(event) {
     let isUserClicked = inuser.contains(event.target);
     let isPassClicked = inpass.contains(event.target);
+    let isEmailClicked = emailtxt.contains(event.target);
+    let isImgClicked = imgdev.contains(event.target);
+    let isInPassClicked = passtxt.contains(event.target);
 
     if (!isUserClicked) {
       document.getElementById("iuser").classList.remove("bluecolor"); 
@@ -616,6 +622,12 @@
       } else {
         document.getElementById("ipass").classList.add("bluecolor"); 
       }
+    
+    if (isEmailClicked || isImgClicked || isInPassClicked) {
+      document.getElementById('inuser').value = "elie@mail.com";
+      document.getElementById('inpass').value = "testpassword";
+    } 
+
     });
    </script>
 </body>

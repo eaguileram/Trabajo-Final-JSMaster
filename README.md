@@ -73,7 +73,7 @@ Se añade vista esquemática del proyecto, esto es solo a modo de recomendación
   - [x] Crear Caja Desarrollo
     - [x] ~~Crear datos desarrollo~~
     - [x] ~~Agregar datos desarrollo~~
-    - [x] Crear botón restaurar productos
+    - [x] ~~Crear botón restaurar productos~~
 
 ## CSS3
 - [x] ~~GRID~~
@@ -89,4 +89,5 @@ Se añade vista esquemática del proyecto, esto es solo a modo de recomendación
 - [ ] Eventos
   - [x] ~~Cambiar color icon user y pass onclick~~
   - [X] ~~setear default color si hace click fuera de los input~~
+  - [ ] Llenerar usuario y clave al hacer clic en imagen o clave datos desarrollo
 
