@@ -70,10 +70,10 @@ Se añade vista esquemática del proyecto, esto es solo a modo de recomendación
     - [x] ~~Crear detalle compra~~
     - [x] ~~Crear Botón Comprar~~
     - [x] ~~Crear mensaje compra~~
-  - [ ] Crear Caja Desarrollo
-    - [ ] Crear datos desarrollo
-    - [ ] Agregar datos desarrollo
-    - [ ] Crear botón restaurar productos
+  - [x] Crear Caja Desarrollo
+    - [x] ~~Crear datos desarrollo~~
+    - [x] ~~Agregar datos desarrollo~~
+    - [x] Crear botón restaurar productos
 
 ## CSS3
 - [x] ~~GRID~~

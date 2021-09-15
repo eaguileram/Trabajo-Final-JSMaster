@@ -354,6 +354,95 @@
       .titleCompra {
         margin-top: 2em;
       }
+
+      .login-accounts-panel .panel-inner .login-block {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    padding: 12px 0;
+    margin: 0 20px;
+    cursor: pointer;
+    align-items: center;
+}
+.login-accounts-panel .panel-inner .header {
+    padding: 16px 20px 6px 20px;
+    text-transform: uppercase;
+    font-family: Montserrat;
+    font-size: .7rem;
+    font-weight: 600;
+    color: #999;
+    padding-bottom: 14px;
+    align-items: left;
+    display: block;
+    line-height: 3;
+    margin-bottom: -1em;
+    
+}
+
+.login-accounts-panel .panel-inner .header p {
+    text-transform:lowercase;
+    font-family: Montserrat;
+    font-size: .7rem;
+    font-weight: 600;
+    color: #999;
+    padding-bottom: 14px;
+    align-items: left;
+    display: block;
+    line-height: 3;
+    margin-bottom: -1em;
+    
+}
+
+.login-accounts-panel .panel-inner .login-block img {
+    display: block;
+    border-radius: 50%;
+    height: 38px;
+    width: 38px;
+    -webkit-filter: grayscale(1);
+    filter: grayscale(1);
+    opacity: .6;
+    -webkit-transition: all .3s;
+    transition: all .3s;
+}
+
+.login-accounts-panel .panel-inner .login-block:hover img {
+    -webkit-filter: grayscale(0);
+    filter: grayscale(0);
+    opacity: 1;
+}
+
+.login-accounts-panel .panel-inner .login-block .meta {
+    margin-left: 12px;
+    text-align: left;
+    font-size: 80%;
+    font-weight: 500;
+}
+
+.login-accounts-panel .panel-inner {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    
+}
+
+.login-accounts-panel.is-active {
+    opacity: 1;
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+    width: 100%;
+}
+
+.flbl {
+  text-transform: uppercase;
+    color: #999;
+    font-size: .65rem;
+    font-weight: 400;
+}
+
+.header h3 {
+ text-align: center;
+}
+ 
     
       @media (min-width: 2000px) { article{ grid-template-columns: 1fr 1fr 1fr 1fr;} }
       @media (max-width: 1500px) { article{ grid-template-columns: 1fr 1fr;} }
@@ -474,25 +563,34 @@
       <!-- Datos Desarrollo -->
       <section>
         <div class="asidebox userbox">
-          <div class="avatarbox">
-              <img src="img/elie.jpg" data-demo-src="img/elie.jpg" alt="">
-          </div>
-          <div class="metadata">
-              <span>Comprador(a)</span>
-              <span>Elie Daniels</span>
-          </div>
-        </div>
-        <div id="loginform" class="asidebox userbox login">
-          <span>Inicie Sesión</span>
-          <form>
-            <div class="boxinput">
-              <i id="iuser" class="fa fa-user boxicon" aria-hidden="true"></i><input id="inuser" type="text" placeholder="nombre">
+          <div class="login-accounts-panel is-active">
+            <div class="panel-inner">
+                <div class="header">
+                    <h3>Datos para desarrollo</h3>
+                    <p class="headerp">Use la siguiente credencial para iniciar sesión</p>
+                </div>
+                <!--Block-->
+                <div class="login-block">
+                    <img src="img/elie.jpg" data-demo-src="assets/img/avatars/elie.jpg" alt="">
+                    <div class="meta">
+                        <span>
+                                <label class="flbl">Email: </label>
+                                <span >elie@mail.com</span><br />
+                        </span>
+                        <span>
+                                <label class="flbl">Password: </label>
+                                <span >testpassword</span>
+                        </span>
+                        
+                    </div>
+                   
+                   
+                </div>
+                <div class="carticonbox">
+                  <button class="btnagregar titleBtn">Restaurar productos</button>
+                </div>
             </div>
-            <div class="boxinput">
-              <i id="ipass" class="fa fa-lock boxicon" aria-hidden="true"></i><input id="inpass" type="password" placeholder="contraseña">
-            </div>           
-            <button class="btnagregar titleBtn">Iniciar Sesión</button>
-          </form>
+          </div>
         </div>
       </section>
       
