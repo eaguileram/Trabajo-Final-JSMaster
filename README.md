@@ -6,9 +6,9 @@ Forma de entrega: Link a repositorio Github con el proyecto, el link debe ser en
 ## Descripción general del proyecto<br />
 
 Se debe realizar en modo SPA (Single Page Application) una tienda de comercio electrónico con las siguientes características:<br />
-Se debe utilizar HTML, CSS y Javascript o Typescript, no se permitirá el uso de frameworks (React, Angular u otro).<br />
-En caso de estar realizado en Typescript no debe incluir los archivos compilados a JS.<br />
-El proyecto solo debe contener 1 archivo html (index.html).<br />
+~~Se debe utilizar HTML, CSS y Javascript o Typescript, no se permitirá el uso de frameworks (React, Angular u otro).~~<br />
+~~En caso de estar realizado en Typescript no debe incluir los archivos compilados a JS.~~<br />
+~~El proyecto solo debe contener 1 archivo html (index.html).~~<br />
 El usuario debe ser capaz de ver una variedad de productos y añadirlos a un carro de compra.<br />
 El usuario debe poder autenticarse, la validación debe ser estática y se debe aclarar cuál será el usuario y contraseña para uso del ejercicio.<br />
 La posibilidad de iniciar sesión no debe estar disponible si el usuario ha iniciado sesión, y en ese caso debe mostrar el nombre del usuario.<br />
