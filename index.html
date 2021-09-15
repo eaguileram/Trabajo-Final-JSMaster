@@ -37,6 +37,7 @@
         padding: 1em;
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;
+        grid-template-rows: 0fr;
       }
 
       article > img, figcaption, span > button{
@@ -471,7 +472,29 @@
         </div>
       </section>
       <!-- Datos Desarrollo -->
-      
+      <section>
+        <div class="asidebox userbox">
+          <div class="avatarbox">
+              <img src="img/elie.jpg" data-demo-src="img/elie.jpg" alt="">
+          </div>
+          <div class="metadata">
+              <span>Comprador(a)</span>
+              <span>Elie Daniels</span>
+          </div>
+        </div>
+        <div id="loginform" class="asidebox userbox login">
+          <span>Inicie Sesión</span>
+          <form>
+            <div class="boxinput">
+              <i id="iuser" class="fa fa-user boxicon" aria-hidden="true"></i><input id="inuser" type="text" placeholder="nombre">
+            </div>
+            <div class="boxinput">
+              <i id="ipass" class="fa fa-lock boxicon" aria-hidden="true"></i><input id="inpass" type="password" placeholder="contraseña">
+            </div>           
+            <button class="btnagregar titleBtn">Iniciar Sesión</button>
+          </form>
+        </div>
+      </section>
       
     </aside>
   </div>
