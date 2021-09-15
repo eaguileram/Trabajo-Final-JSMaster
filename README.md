@@ -86,8 +86,8 @@ Se añade vista esquemática del proyecto, esto es solo a modo de recomendación
 - [x] ~~Media Responsive~~
 
 ## JS
-- [ ] Eventos
+- [x] Eventos
   - [x] ~~Cambiar color icon user y pass onclick~~
   - [X] ~~setear default color si hace click fuera de los input~~
-  - [ ] Llenerar usuario y clave al hacer clic en imagen o clave datos desarrollo
+  - [x] ~~Llenerar usuario y clave al hacer clic en imagen o clave datos desarrollo~~
 
