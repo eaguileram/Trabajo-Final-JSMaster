@@ -72,6 +72,7 @@ Se añade vista esquemática del proyecto, esto es solo a modo de recomendación
     - [x] ~~Crear mensaje compra~~
   - [ ] Crear Caja Desarrollo
     - [ ] Crear datos desarrollo
+    - [ ] Agregar datos desarrollo
     - [ ] Crear botón restaurar productos
 
 ## CSS3
