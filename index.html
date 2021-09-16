@@ -443,23 +443,156 @@
  text-align: center;
 }
  
+#toast {
+    visibility: hidden;
+    max-width: 50px;
+    height: 50px;
+    margin-left: -125px;
+    margin: auto;
+    background-color: #0023ff;
+    color: #fff;
+    text-align: center;
+    border-radius: 2px;
+    position: fixed;
+    z-index: 1;
+    left: 0;right:0;
+    bottom: 30px;
+    font-size: 17px;
+    white-space: nowrap;
+    border-radius: 30em;
+}
+#toast #img{
+	  width: 50px;
+	  height: 50px;
+    float: left;
+    padding-top: 16px;
+    padding-bottom: 16px;
+    box-sizing: border-box;    
+    background-color: #0023ff;
+    color: #fff;
+    border-radius: 30em;
+}
+#toast #desc{
+
+    
+    color: #f0f0f0;
+   
+    padding: 16px;
+    
+    overflow: hidden;
+	white-space: nowrap;
+}
+
+#toast.show {
+    visibility: visible;
+    -webkit-animation: fadein 0.3s, expand 0.5s 0.5s,stay 4s 1s, shrink 0.5s 3s, fadeout 4s;
+    animation: fadein 0.3s, expand 0.5s 0.5s,stay 4s 1s, shrink 0.5s 3s, fadeout 4s;
+}
+
+@-webkit-keyframes fadein {
+    from {bottom: 0; opacity: 0;} 
+    to {bottom: 30px; opacity: 1;}
+}
+
+@keyframes fadein {
+    from {bottom: 0; opacity: 0;}
+    to {bottom: 30px; opacity: 1;}
+}
+
+@-webkit-keyframes expand {
+    from {min-width: 50px} 
+    to {min-width: 250px}
+}
+
+@keyframes expand {
+    from {min-width: 50px}
+    to {min-width: 250px}
+}
+@-webkit-keyframes stay {
+    from {min-width: 250px} 
+    to {min-width: 250px}
+}
+
+@keyframes stay {
+    from {min-width: 250px}
+    to {min-width: 250px}
+}
+@-webkit-keyframes shrink {
+    from {min-width: 250px;} 
+    to {min-width: 50px;}
+}
+
+@keyframes shrink {
+    from {min-width: 250px;} 
+    to {min-width: 50px;}
+}
+
+@-webkit-keyframes fadeout {
+    from {bottom: 30px; opacity: 1;} 
+    to {bottom: 60px; opacity: 0;}
+}
+
+@keyframes fadeout {
+    from {bottom: 30px; opacity: 1;}
+    to {bottom: 60px; opacity: 0; }
+}
+
+.btnagregado {
+    font-family: BlinkMacSystemFont,-apple-system,"Segoe UI","Roboto","Oxygen","Ubuntu","Cantarell","Fira Sans","Droid Sans","Helvetica Neue","Helvetica","Arial",sans-serif;
+    background-color: #f0f0f08f;
+    color: #dedede;
+    border: none;
+    font-size: 1.05em;
+    font-weight: bold;
+    height: 42px;
+    border-radius: 500px;
+    padding: 10px;
+    min-width: 65%;
+    transition: all .5s;
+}
+
+.main-cart-spinner {
+    position: relative;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-around;
+    align-content: center;
+    padding: 10px;
+    min-width: 100px;
+    font-size: 80%;
+    border: 1px solid #ededed;
+    border-radius: 100px;
+    margin-right: 3em;
+    
+    -webkit-box-shadow: -1px 3px 15px 0 rgb(0 0 0 / 6%);
+    box-shadow: -1px 3px 15px 0 rgb(0 0 0 / 6%);
+}
     
       @media (min-width: 2000px) { article{ grid-template-columns: 1fr 1fr 1fr 1fr;} }
       @media (max-width: 1500px) { article{ grid-template-columns: 1fr 1fr;} }
       @media (max-width: 1200px) { article{ grid-template-columns: 1fr} }
       @media (max-width: 1200px) { article{ grid-template-columns: 1fr}  .producto{ height: 450px;} }
-    </style>
+  
+  
+  
+  </style>
+
 </head>
 <body>
+  
   <div class="grid">
+    <div id="toast"><div id="img"><i class="fa fa-plus boxicon " aria-hidden="true"></i></div><div id="desc">añadido exitosamente</div></div>
     <!-- Artículos -->
     <article>
-      <section class="producto"><figure><img src="img/s1.jpg" /><figcaption>Silla Gamer Color Rojo</figcaption></figure><span class="precio">$249.990</span>   <br/><span class="stock">5 unidades disponibles</span><br/><button class="btnagregar">Añadir a Compra</button><br/><span class="encarrito">Tienes 0 unidades en el carro de compra</span></section>
-      <section class="producto"><figure><img src="img/s2.jpg" /><figcaption>Silla Gamer Color Celeste</figcaption></figure><span class="precio">$169.900</span><br/><span class="stock">5 unidades disponibles</span><br/><button class="btnagregar">Añadir a Compra</button><br/><span class="encarrito">Tienes 0 unidades en el carro de compra</span></section>
-      <section class="producto"><figure><img src="img/s3.jpg" /><figcaption>Silla Gamer Color Rosada</figcaption></figure><span class="precio">$134.990</span> <br/><span class="stock">5 unidades disponibles</span><br/><button class="btnagregar">Añadir a Compra</button><br/><span class="encarrito">Tienes 0 unidades en el carro de compra</span></section>
-      <section class="producto"><figure><img src="img/s4.jpg" /><figcaption>Silla Gamer Color Blanca</figcaption></figure><span class="precio">$159.990</span> <br/><span class="stock">5 unidades disponibles</span><br/><button class="btnagregar">Añadir a Compra</button><br/><span class="encarrito">Tienes 0 unidades en el carro de compra</span></section>
-      <section class="producto"><figure><img src="img/s5.jpg" /><figcaption>Silla Gamer Color Azul</figcaption></figure><span class="precio">$149.990</span>   <br/><span class="stock">5 unidades disponibles</span><br/><button class="btnagregar">Añadir a Compra</button><br/><span class="encarrito">Tienes 0 unidades en el carro de compra</span></section>
-      <section class="producto"><figure><img src="img/s6.jpg" /><figcaption>Silla Gamer Color Verde</figcaption></figure><span class="precio">$119.990</span>  <br/><span class="stock">5 unidades disponibles</span><br/><button class="btnagregar">Añadir a Compra</button><br/><span class="encarrito">Tienes 0 unidades en el carro de compra</span></section>
+      <section class="producto"><figure><img src="img/s1.jpg" /><figcaption>Silla Gamer Color Rojo</figcaption></figure><span class="precio">$249.990</span>   <br/><span class="stock">5 unidades disponibles</span><br/><button  class="btnCrt btnagregar">Añadir a Compra</button><br/><span class="encarrito">Tienes 0 unidades en el carro de compra</span></section>
+      <section class="producto"><figure><img src="img/s2.jpg" /><figcaption>Silla Gamer Color Celeste</figcaption></figure><span class="precio">$169.900</span><br/><span class="stock">5 unidades disponibles</span><br/><button  class="btnCrt btnagregar">Añadir a Compra</button><br/><span class="encarrito">Tienes 0 unidades en el carro de compra</span></section>
+      <section class="producto"><figure><img src="img/s3.jpg" /><figcaption>Silla Gamer Color Rosada</figcaption></figure><span class="precio">$134.990</span> <br/><span class="stock">5 unidades disponibles</span><br/><button  class="btnCrt btnagregar">Añadir a Compra</button><br/><span class="encarrito">Tienes 0 unidades en el carro de compra</span></section>
+      <section class="producto"><figure><img src="img/s4.jpg" /><figcaption>Silla Gamer Color Blanca</figcaption></figure><span class="precio">$159.990</span> <br/><span class="stock">5 unidades disponibles</span><br/><button  class="btnCrt btnagregar">Añadir a Compra</button><br/><span class="encarrito">Tienes 0 unidades en el carro de compra</span></section>
+      <section class="producto"><figure><img src="img/s5.jpg" /><figcaption>Silla Gamer Color Azul</figcaption></figure><span class="precio">$149.990</span>   <br/><span class="stock">5 unidades disponibles</span><br/><button  class="btnCrt btnagregar">Añadir a Compra</button><br/><span class="encarrito">Tienes 0 unidades en el carro de compra</span></section>
+      <section class="producto"><figure><img src="img/s6.jpg" /><figcaption>Silla Gamer Color Verde</figcaption></figure><span class="precio">$119.990</span>  <br/><span class="stock">5 unidades disponibles</span><br/><button  class="btnCrt btnagregar">Añadir a Compra</button><br/><span class="encarrito">Tienes 0 unidades en el carro de compra</span></section>
     </article>
   
     <aside class="sidebar-right">
@@ -510,6 +643,12 @@
                 <span>2 unidades</span>
                 <span>Total $499.980</span>  
             </div>
+            <div data-trigger="spinner" class="main-cart-spinner">
+              <i class="fa fa-plus-square boxicon boxiconcart" aria-hidden="true"></i>
+              
+              <span class="spinner-value">1</span>
+              <i class="fa fa-minus-square boxicon boxiconcart" aria-hidden="true"></i>
+          </div>
             <div>
               <i id="iuser" class="fa fa-trash boxiconcart" aria-hidden="true"></i>
             </div>
@@ -582,10 +721,7 @@
                                 <label class="flbl">Password: </label>
                                 <span id="passTxt">testpassword</span>
                         </span>
-                        
                     </div>
-                   
-                   
                 </div>
                 <div class="carticonbox">
                   <button class="btnagregar titleBtn">Restaurar productos</button>
@@ -594,7 +730,6 @@
           </div>
         </div>
       </section>
-      
     </aside>
   </div>
    <script>
@@ -604,6 +739,17 @@
     let emailtxt = document.getElementById('emailTxt');
     let imgdev = document.getElementById('imgDev');
     let passtxt = document.getElementById('passTxt');
+    let btadd = document.querySelectorAll('.btnCrt');
+
+    for (let i = 0; i < btadd.length; i++) {
+        btadd[i].addEventListener('click', function(event) {
+            btadd[i].classList.remove("btnagregar");
+            btadd[i].classList.add("btnagregado");
+            btadd[i].setAttribute('disabled', '');
+            btadd[i].innerHTML = ('<i class="fa fa-shopping-basket boxicon" aria-hidden="true"></i> Agregado en el carrito');
+            launch_toast();
+        });
+    }
 
     document.addEventListener('click', function(event) {
     let isUserClicked = inuser.contains(event.target);
@@ -611,6 +757,7 @@
     let isEmailClicked = emailtxt.contains(event.target);
     let isImgClicked = imgdev.contains(event.target);
     let isInPassClicked = passtxt.contains(event.target);
+     
 
     if (!isUserClicked) {
       document.getElementById("iuser").classList.remove("bluecolor"); 
@@ -628,8 +775,13 @@
       document.getElementById('inuser').value = "elie@mail.com";
       document.getElementById('inpass').value = "testpassword";
     } 
-
     });
+
+    function launch_toast() {
+    let x = document.getElementById("toast")
+    x.className = "show";
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 2000);
+}
    </script>
 </body>
 </html>

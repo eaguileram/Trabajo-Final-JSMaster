@@ -14,7 +14,7 @@ El usuario debe poder autenticarse, la validación debe ser estática ~~y se deb
 La posibilidad de iniciar sesión no debe estar disponible si el usuario ha iniciado sesión, y en ese caso debe mostrar el nombre del usuario.<br />
 La cuenta de usuario no debe persistir cuando el usuario sale del sitio (cierra la pestaña o cierra el navegador).<br />
 ~~Cada producto debe tener 1 imagen, 1 título, 1 precio y stock disponible (entre 1 y 5 unidades).~~<br />
-Cada producto debe indicar si ese producto se encuentra  en el carro de compras y en qué cantidad, permitiendo añadir más del mismo ítem.<br />
+~~Cada producto debe indicar si ese producto se encuentra  en el carro de compras y en qué cantidad~~, permitiendo añadir más del mismo ítem.<br />
 El usuario no debe ser capaz de solicitar una cantidad mayor a la disponible.<br />
 El stock de productos debe persistir ante la recarga de la página y si el usuario sale del sitio.<br />
 El carro de compra debe persistir sus datos aún cuando el usuario realice una recarga de la página o si el usuario sale del sitio.<br />
@@ -58,6 +58,7 @@ Se añade vista esquemática del proyecto, esto es solo a modo de recomendación
   - [x] ~~Precio~~
   - [x] ~~Stocḳ~~
   - [x] ~~Botón de compra~~
+    - [x] ~~Alerta de añadido al carrito
   - [x] ~~Estado pedido~~
 - [x] ~~ASIDE~~
   - [x] ~~Crear Caja Login~~
@@ -69,7 +70,7 @@ Se añade vista esquemática del proyecto, esto es solo a modo de recomendación
     - [x] ~~Crear Cart~~
     - [x] ~~Crear detalle compra~~
     - [x] ~~Crear botón eliminar artículo~~
-      - [ ] Crear botones aumentar, disminuir cantidad
+      - [x] ~~Crear botones aumentar, disminuir cantidad~~
     - [x] ~~Crear Botón Comprar~~
     - [x] ~~Crear mensaje compra~~
   - [x] Crear Caja Desarrollo
@@ -84,7 +85,8 @@ Se añade vista esquemática del proyecto, esto es solo a modo de recomendación
   - [x] ~~Bordes Input~~
   - [x] ~~Bordes Icon~~
   - [x] ~~Eliminar border input selected~~
-  - [X] ~~Agregar clase color azul icon input selected~~
+  - [x] ~~Agregar clase color azul icon input selected~~
+  - [x] ~~transición más lenta al desaparecer toast~~
 - [x] ~~Media Responsive~~
 
 ## JS
@@ -92,4 +94,6 @@ Se añade vista esquemática del proyecto, esto es solo a modo de recomendación
   - [x] ~~Cambiar color icon user y pass onclick~~
   - [X] ~~setear default color si hace click fuera de los input~~
   - [x] ~~Llenerar usuario y clave al hacer clic en imagen o clave datos desarrollo~~
+  - [x] ~~Aparecer alerta si se presiona en cualquier botón Añadir a compra~~
+  - [x] ~~Deshabilitar botón de compra después de presionar~~
 
