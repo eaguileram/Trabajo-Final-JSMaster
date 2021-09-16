@@ -58,7 +58,7 @@ Se añade vista esquemática del proyecto, esto es solo a modo de recomendación
   - [x] ~~Precio~~
   - [x] ~~Stocḳ~~
   - [x] ~~Botón de compra~~
-    - [x] ~~Alerta de añadido al carrito
+    - [x] ~~Alerta de añadido al carrito~~
   - [x] ~~Estado pedido~~
 - [x] ~~ASIDE~~
   - [x] ~~Crear Caja Login~~
