@@ -97,8 +97,8 @@ Se añade vista esquemática del proyecto, esto es solo a modo de recomendación
   - [x] ~~Llenerar usuario y clave al hacer clic en imagen o clave datos desarrollo~~
   - [x] ~~Aparecer alerta si se presiona en cualquier botón Añadir a compra~~
   - [x] ~~Deshabilitar botón de compra después de presionar~~
-  - [ ] Login
-    - [ ] function login
+  - [x] ~~Login~~
+    - [x] ~~function login~~
       - [x] ~~si no está logueado, ocultar box nombre~~
       - [x] ~~validar usuario y pass~~
       - [x] ~~si es correcto, ocultar login y mostrar nombre~~
