@@ -567,6 +567,45 @@
       .boxCliente {
         display: none;
       }
+
+      #hover {
+       
+        padding: 6px;
+        display: block;
+        position: relative;
+      }
+
+      
+
+      #popup {
+        font-family: BlinkMacSystemFont,-apple-system,"Segoe UI","Roboto","Oxygen","Ubuntu","Cantarell","Fira Sans","Droid Sans","Helvetica Neue","Helvetica","Arial",sans-serif;
+        opacity: 0;
+        position: absolute;
+        top: -40px;
+        right: -10px;
+        background: #344258!important;
+        color: #fff !important;
+        border: none;
+        border-radius: 6px;
+        height: 0px;
+        padding: 0 12px;
+        overflow: hidden;
+        transition: all .6s;
+        font-size: 70%;
+        font-weight: 400;
+        -webkit-box-shadow: 0 14px 26px -12px rgb(0 35 255 / 42%), 0 4px 23px 0px rgb(0 0 0 / 12%), 0 8px 10px -5px rgb(0 35 255 / 20%) !important;
+        box-shadow: 0 14px 26px -12px rgb(0 35 255 / 42%), 0 4px 23px 0px rgb(0 0 0 / 12%), 0 8px 10px -5px rgb(0 35 255 / 20%) !important;
+        opacity: .9 .5;
+      }
+
+      #hover:hover #popup {
+          padding: 10px 10px;
+          height: auto;
+          opacity: 1;
+          border:none;
+      }
+
+      
     
       @media (min-width: 2000px) { article{ grid-template-columns: 1fr 1fr 1fr 1fr;} }
       @media (max-width: 1500px) { article{ grid-template-columns: 1fr 1fr;} }
@@ -646,8 +685,9 @@
               <span class="spinner-value">1</span>
               <i class="fa fa-plus-square boxicon boxiconcart" aria-hidden="true"></i>
           </div>
-            <div>
+            <div id="hover">
               <i id="iuser" class="fa fa-trash boxiconcart" aria-hidden="true"></i>
+              <div id="popup">Quitar</div>          
             </div>
           </div>
           

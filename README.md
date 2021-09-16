@@ -87,6 +87,7 @@ Se añade vista esquemática del proyecto, esto es solo a modo de recomendación
   - [x] ~~Eliminar border input selected~~
   - [x] ~~Agregar clase color azul icon input selected~~
   - [x] ~~transición más lenta al desaparecer toast~~
+  - [x] ~~aparecer title encima del basurero indicando quitar artículo del carrito~~
 - [x] ~~Media Responsive~~
 
 ## JS
