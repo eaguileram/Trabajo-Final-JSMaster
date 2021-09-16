@@ -101,5 +101,5 @@ Se añade vista esquemática del proyecto, esto es solo a modo de recomendación
       - [x] ~~si no está logueado, ocultar box nombre~~
       - [x] ~~validar usuario y pass~~
       - [x] ~~si es correcto, ocultar login y mostrar nombre~~
-      - [x] persistir usuario al refrescar la página
+      - [x] ~~persistir sesión de usuario al refrescar la página~~
 
