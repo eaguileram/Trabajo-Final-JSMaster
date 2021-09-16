@@ -600,7 +600,7 @@
               <img src="img/elie.jpg" data-demo-src="img/elie.jpg" alt="">
           </div>
           <div class="metadata">
-              <span>Comprador(a)</span>
+              <span>Comprar como</span>
               <span>Elie Daniels</span>
           </div>
         </div>
@@ -641,10 +641,10 @@
                 <span>Total $499.980</span>  
             </div>
             <div data-trigger="spinner" class="main-cart-spinner">
-              <i class="fa fa-plus-square boxicon boxiconcart" aria-hidden="true"></i>
+              <i class="fa fa-minus-square boxicon boxiconcart" aria-hidden="true"></i>
               
               <span class="spinner-value">1</span>
-              <i class="fa fa-minus-square boxicon boxiconcart" aria-hidden="true"></i>
+              <i class="fa fa-plus-square boxicon boxiconcart" aria-hidden="true"></i>
           </div>
             <div>
               <i id="iuser" class="fa fa-trash boxiconcart" aria-hidden="true"></i>
@@ -673,6 +673,7 @@
               <span class="precioDetalle">$1.500</span>
             </div>
           </div>
+          
           <div class="asideboxArticuloDetalle userbox">
             <div class="metadataArticulo">
               <span class="precioTotal">Total a Comprar </span>
@@ -681,17 +682,18 @@
               <span class="precioDetalle precioTotal">$501.480</span>
             </div>
           </div>
+          <!-- Botón Comprar -->
           <div class="asideboxArticuloDetalle">
             <div class="carticonbox">
-              <button class="btnagregar titleBtn">Realizar Compra</button>
+              <button class="btnagregar titleBtn boxCliente" id="btnRComprar">Realizar Compra</button>
             </div>
           </div>
           <!-- Mensaje Compra Exitosa -->
-          <div class="asideboxArticuloDetalle">
+          <div class="asideboxArticuloDetalle boxCliente">
             <div class="carticonbox">
               <span><i class="fa fa-check-circle boxicon boxshop boxcheck" aria-hidden="true"></i></span>
             </div>
-            <div class="carticonbox titleBtn titleCompra">
+            <div class="carticonbox titleBtn titleCompra ">
               <span >¡Gracias por tu compra!</span>
             </div>
           </div>
@@ -832,17 +834,21 @@
 
         document.getElementById('loginform').style.display = "none";
         document.getElementById('boxCliente').classList.remove('boxCliente');
+        document.getElementById('btnRComprar').classList.remove('boxCliente');
         msgtoasty(3);
         
       } else {
         msgtoasty(1);
       }
     }
+ 
 
     window.onload = (event) => {
       if ( sessionStorage.getItem("correo") == "elie@mail.com" ){
         document.getElementById('loginform').classList.add = "boxCliente";
         document.getElementById('boxCliente').classList.remove('boxCliente');
+        document.getElementById('btnRComprar').classList.remove('boxCliente');
+       
       } else {
         document.getElementById('loginform').classList.remove("boxCliente");
       }
