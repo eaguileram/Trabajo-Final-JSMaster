@@ -570,6 +570,10 @@
     -webkit-box-shadow: -1px 3px 15px 0 rgb(0 0 0 / 6%);
     box-shadow: -1px 3px 15px 0 rgb(0 0 0 / 6%);
 }
+
+.boxCliente {
+  display: none;
+}
     
       @media (min-width: 2000px) { article{ grid-template-columns: 1fr 1fr 1fr 1fr;} }
       @media (max-width: 1500px) { article{ grid-template-columns: 1fr 1fr;} }
@@ -598,7 +602,7 @@
     <aside class="sidebar-right">
       <!-- Login -->
       <section>
-        <div class="asidebox userbox">
+        <div id="boxCliente" class="asidebox userbox boxCliente">
           <div class="avatarbox">
               <img src="img/elie.jpg" data-demo-src="img/elie.jpg" alt="">
           </div>
@@ -609,14 +613,14 @@
         </div>
         <div id="loginform" class="asidebox userbox login">
           <span>Inicie Sesión</span>
-          <form>
+          <form novalidate>
             <div class="boxinput">
               <i id="iuser" class="fa fa-user boxicon" aria-hidden="true"></i><input id="inuser" type="text" placeholder="nombre">
             </div>
             <div class="boxinput">
               <i id="ipass" class="fa fa-lock boxicon" aria-hidden="true"></i><input id="inpass" type="password" placeholder="contraseña">
-            </div>           
-            <button class="btnagregar titleBtn">Iniciar Sesión</button>
+            </div>
+            <input type="button" class="btnagregar titleBtn" id="submit" value="Iniciar Sesión"> 
           </form>
         </div>
       </section>
@@ -733,13 +737,15 @@
     </aside>
   </div>
    <script>
-    
+    'use strict';
+
     let inuser = document.getElementById('inuser');
     let inpass = document.getElementById('inpass');
     let emailtxt = document.getElementById('emailTxt');
     let imgdev = document.getElementById('imgDev');
     let passtxt = document.getElementById('passTxt');
     let btadd = document.querySelectorAll('.btnCrt');
+    let submited = document.getElementById('submit');
 
     for (let i = 0; i < btadd.length; i++) {
         btadd[i].addEventListener('click', function(event) {
@@ -747,16 +753,19 @@
             btadd[i].classList.add("btnagregado");
             btadd[i].setAttribute('disabled', '');
             btadd[i].innerHTML = ('<i class="fa fa-shopping-basket boxicon" aria-hidden="true"></i> Agregado en el carrito');
-            launch_toast();
+            msgtoasty(0);
         });
     }
 
     document.addEventListener('click', function(event) {
+    event.preventDefault();
+
     let isUserClicked = inuser.contains(event.target);
     let isPassClicked = inpass.contains(event.target);
     let isEmailClicked = emailtxt.contains(event.target);
     let isImgClicked = imgdev.contains(event.target);
     let isInPassClicked = passtxt.contains(event.target);
+    let isSubmitedClicked = submited.contains(event.target);
      
 
     if (!isUserClicked) {
@@ -775,13 +784,67 @@
       document.getElementById('inuser').value = "elie@mail.com";
       document.getElementById('inpass').value = "testpassword";
     } 
+
+    if (isSubmitedClicked) {
+      validarLogin();
+    }
     });
 
     function launch_toast() {
-    let x = document.getElementById("toast")
-    x.className = "show";
-    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 2000);
-}
+      let x = document.getElementById("toast")
+      x.className = "show";
+      setTimeout(function(){ x.className = x.className.replace("show", ""); }, 2000);
+    }
+
+    function msgtoasty(n) {
+      let p = new Promise(function (resolve, reject) {
+         if ( n == 1 ) {
+          document.getElementById('toast').style.backgroundColor = 'black';
+          document.getElementById('img').style.backgroundColor = 'black';
+          document.getElementById('img').innerHTML = '<i class="fa fa-meh-o boxicon" aria-hidden="true"></i>';
+          document.getElementById('desc').innerHTML = "Usuario no encontrado";
+          
+            resolve(launch_toast());
+         } else if ( n == 0 ) {
+          document.getElementById('toast').style.backgroundColor = '#0023ff';
+          document.getElementById('img').style.backgroundColor = '#0023ff';
+          document.getElementById('img').innerHTML = '<i class="fa fa-plus boxicon" aria-hidden="true"></i>';
+          document.getElementById('desc').innerHTML = "añadido exitosamente";
+          resolve(launch_toast());
+         } else if ( n == 3 ) {
+          document.getElementById('toast').style.backgroundColor = '#0023ff';
+          document.getElementById('img').style.backgroundColor = '#0023ff';
+          document.getElementById('img').innerHTML = '<i class="fa fa-check boxicon" aria-hidden="true"></i>';
+          document.getElementById('desc').innerHTML = "logueado exitosamente";
+          resolve(launch_toast());
+         }
+         else
+            reject('Error de ejecución')
+      })
+      return p;
+    }
+
+    
+
+    
+   
+
+    function validarLogin(){
+      let correo = inuser.value;
+      let clave = inpass.value;
+
+      if ( correo == "elie@mail.com" && clave == "testpassword") {
+        document.getElementById('loginform').style.display = "none";
+        document.getElementById('boxCliente').classList.remove('boxCliente');
+        msgtoasty(3);
+        
+      } else {
+        msgtoasty(1);
+      }
+    
+    
+
+    }
    </script>
 </body>
 </html>
