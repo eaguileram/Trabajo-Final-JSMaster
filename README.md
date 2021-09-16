@@ -19,7 +19,7 @@ El usuario no debe ser capaz de solicitar una cantidad mayor a la disponible.<br
 El stock de productos debe persistir ante la recarga de la página y si el usuario sale del sitio.<br />
 El carro de compra debe persistir sus datos aún cuando el usuario realice una recarga de la página o si el usuario sale del sitio.<br />
 El carro de compra debe calcular el total de la compra en base al valor de los productos seleccionados, añadir un costo de $1500CLP por envío (US$ 2) y $350CLP (US$0,5) por cada producto.<br />
-El carro de compra debe tener un botón de compra, que solo debe estar habilitado si el usuario ha iniciado sesión.<br />
+~~El carro de compra debe tener un botón de compra, que solo debe estar habilitado si el usuario ha iniciado sesión.~~<br />
 Al realizar la compra, se debe simular una petición asíncrona que se demore 3 segundos en responder.<br />
 Se debe notificar al usuario que la compra está siendo realizada, mientras esto sucede, el usuario no debe ser capaz de añadir nuevos productos ni realizar otra compra.<br />
 Cuando se realiza la compra, el carro de compra debe ser vaciado y mostrar un mensaje de compra exitosa, pero permitiendo que el usuario sea capaz de volver a realizar una compra.<br />
