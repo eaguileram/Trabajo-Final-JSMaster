@@ -109,7 +109,7 @@ Se añade vista esquemática del proyecto, esto es solo a modo de recomendación
       - [x] ~~Crear objetos de la clase articulos desde el JSON~~
       - [x] ~~cargar objetos en vista usuario~~
       - [x] ~~funcion para añadir eventos al carrito~~
-   - [] Carrito
+   - [ ] Carrito
       - [x] ~~Crear objeto carrito~~
       - [x] ~~Crear variable total~~
       - [x] ~~Crear constante total del DOM~~
