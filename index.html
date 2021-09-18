@@ -26,6 +26,9 @@
         background: #f0f0f0;
       }
 
+      ul {
+        list-style: none;
+      }
       .grid {
         display: grid;
         grid-template-columns: 3fr 1fr;
@@ -532,17 +535,17 @@
       }
 
       .btnagregado {
-        font-family: BlinkMacSystemFont,-apple-system,"Segoe UI","Roboto","Oxygen","Ubuntu","Cantarell","Fira Sans","Droid Sans","Helvetica Neue","Helvetica","Arial",sans-serif;
-        background-color: #f0f0f08f;
+        font-family: "Montserrat";
         color: #dedede;
         border: none;
-        font-size: 1.05em;
-        font-weight: bold;
         height: 42px;
         border-radius: 500px;
         padding: 10px;
         min-width: 65%;
         transition: all .5s;
+        font-size: .73rem;
+        font-weight: 600;
+        text-transform: uppercase;
       }
 
       .main-cart-spinner {
@@ -575,8 +578,6 @@
         position: relative;
       }
 
-      
-
       #popup {
         font-family: BlinkMacSystemFont,-apple-system,"Segoe UI","Roboto","Oxygen","Ubuntu","Cantarell","Fira Sans","Droid Sans","Helvetica Neue","Helvetica","Arial",sans-serif;
         opacity: 0;
@@ -604,8 +605,7 @@
           opacity: 1;
           border:none;
       }
-
-      
+ 
     
       @media (min-width: 2000px) { article{ grid-template-columns: 1fr 1fr 1fr 1fr;} }
       @media (max-width: 1500px) { article{ grid-template-columns: 1fr 1fr;} }
@@ -622,13 +622,8 @@
   <div class="grid">
     <div id="toast"><div id="img"><i class="fa fa-plus boxicon " aria-hidden="true"></i></div><div id="desc">añadido exitosamente</div></div>
     <!-- Artículos -->
-    <article>
-      <section class="producto"><figure><img src="img/s1.jpg" /><figcaption>Silla Gamer Color Rojo</figcaption></figure><span class="precio">$249.990</span>   <br/><span class="stock">5 unidades disponibles</span><br/><button  class="btnCrt btnagregar">Añadir a Compra</button><br/><span class="encarrito">Tienes 0 unidades en el carro de compra</span></section>
-      <section class="producto"><figure><img src="img/s2.jpg" /><figcaption>Silla Gamer Color Celeste</figcaption></figure><span class="precio">$169.900</span><br/><span class="stock">5 unidades disponibles</span><br/><button  class="btnCrt btnagregar">Añadir a Compra</button><br/><span class="encarrito">Tienes 0 unidades en el carro de compra</span></section>
-      <section class="producto"><figure><img src="img/s3.jpg" /><figcaption>Silla Gamer Color Rosada</figcaption></figure><span class="precio">$134.990</span> <br/><span class="stock">5 unidades disponibles</span><br/><button  class="btnCrt btnagregar">Añadir a Compra</button><br/><span class="encarrito">Tienes 0 unidades en el carro de compra</span></section>
-      <section class="producto"><figure><img src="img/s4.jpg" /><figcaption>Silla Gamer Color Blanca</figcaption></figure><span class="precio">$159.990</span> <br/><span class="stock">5 unidades disponibles</span><br/><button  class="btnCrt btnagregar">Añadir a Compra</button><br/><span class="encarrito">Tienes 0 unidades en el carro de compra</span></section>
-      <section class="producto"><figure><img src="img/s5.jpg" /><figcaption>Silla Gamer Color Azul</figcaption></figure><span class="precio">$149.990</span>   <br/><span class="stock">5 unidades disponibles</span><br/><button  class="btnCrt btnagregar">Añadir a Compra</button><br/><span class="encarrito">Tienes 0 unidades en el carro de compra</span></section>
-      <section class="producto"><figure><img src="img/s6.jpg" /><figcaption>Silla Gamer Color Verde</figcaption></figure><span class="precio">$119.990</span>  <br/><span class="stock">5 unidades disponibles</span><br/><button  class="btnCrt btnagregar">Añadir a Compra</button><br/><span class="encarrito">Tienes 0 unidades en el carro de compra</span></section>
+    <article id="items">
+      
     </article>
   
     <aside class="sidebar-right">
@@ -660,41 +655,20 @@
       <section>
         <div class="asidebox cartbox">
           <div class="metadataCart titleCart">
-            <span>Carrito vacío</span>
+            <span><i class="fa fa-shopping-basket boxicon boxshop" aria-hidden="true"></i> Carrito</span>
           </div>
-          <div class="carticonbox">
-            <i class="fa fa-shopping-basket boxicon" aria-hidden="true"></i>
-          </div>
-          <div class="metadataCart">
-            <span><span class="cartNumber">0</span> Artículo(s) en el carrito.</span>
-          </div>
+          
+   
           <!-- Listado de Artículos -->
-          <div class="asideboxArticulo userbox">
-            <div class="avatarcart">
-                <img src="img/s1.jpg" data-demo-src="img/elie.jpg" alt="">
-            </div>
-            <div class="metadataArticulo">
-                <span>SILLA GAMER COLOR ROJO</span>
-                <span>$249.990</span>
-                <span>2 unidades</span>
-                <span>Total $499.980</span>  
-            </div>
-            <div data-trigger="spinner" class="main-cart-spinner">
-              <i class="fa fa-minus-square boxicon boxiconcart" aria-hidden="true"></i>
-              
-              <span class="spinner-value">1</span>
-              <i class="fa fa-plus-square boxicon boxiconcart" aria-hidden="true"></i>
-          </div>
-            <div id="hover">
-              <i id="iuser" class="fa fa-trash boxiconcart" aria-hidden="true"></i>
-              <div id="popup">Quitar</div>          
-            </div>
-          </div>
+          
+            <ul id="carrito" class="list-group"></ul>
+                
+               
           
           <!-- Detalle Compra -->
           <div class="asideboxArticuloDetalle">
             <div class="carticonbox">
-               <span class="metadataCart titleDetalle titleCart"><i class="fa fa-shopping-cart boxicon boxshop" aria-hidden="true"></i> <span class="cartNumber">2</span> Artículo(s) en Carrito</span>
+               <span class="metadataCart titleDetalle titleCart"><i class="fa fa-shopping-cart boxicon boxshop" aria-hidden="true"></i> <span id="totalitm" class="cartNumber">0</span> Artículo(s) en Carrito</span>
             </div>
           </div>
           <div class="asideboxArticuloDetalle userbox">
@@ -702,7 +676,7 @@
               <span>Total de Artículos </span>
            </div>
             <div>
-              <span class="precioDetalle">$499.980</span>
+              <span id="totalArticulos" class="precioDetalle">$0</span>
             </div>
           </div>
           <div class="asideboxArticuloDetalle userbox">
@@ -710,7 +684,7 @@
               <span>Envío </span>
            </div>
             <div>
-              <span class="precioDetalle">$1.500</span>
+              <span id="costoenv" class="precioDetalle">$0</span>
             </div>
           </div>
           
@@ -719,13 +693,13 @@
               <span class="precioTotal">Total a Comprar </span>
            </div>
             <div>
-              <span class="precioDetalle precioTotal">$501.480</span>
+              <span id="totalcompra" class="precioDetalle precioTotal">$0</span>
             </div>
           </div>
           <!-- Botón Comprar -->
           <div class="asideboxArticuloDetalle">
             <div class="carticonbox">
-              <button class="btnagregar titleBtn boxCliente" id="btnRComprar">Realizar Compra</button>
+              <button class="boxCliente btnagregar titleBtn" id="btnRComprar" disabled>Realizar Compra</button>
             </div>
           </div>
           <!-- Mensaje Compra Exitosa -->
@@ -763,7 +737,7 @@
                     </div>
                 </div>
                 <div class="carticonbox">
-                  <button class="btnagregar titleBtn">Restaurar productos</button>
+                  <button id="boton-vaciar" class="btnagregar titleBtn">Restaurar productos</button>
                 </div>
             </div>
           </div>
@@ -774,6 +748,7 @@
    <script>
     'use strict';
 
+    let islogged = false;
     let inuser = document.getElementById('inuser');
     let inpass = document.getElementById('inpass');
     let emailtxt = document.getElementById('emailTxt');
@@ -781,6 +756,8 @@
     let passtxt = document.getElementById('passTxt');
     let btadd = document.querySelectorAll('.btnCrt');
     let submited = document.getElementById('submit');
+    
+    
 
     for (let i = 0; i < btadd.length; i++) {
         btadd[i].addEventListener('click', function(event) {
@@ -801,7 +778,7 @@
     let isImgClicked = imgdev.contains(event.target);
     let isInPassClicked = passtxt.contains(event.target);
     let isSubmitedClicked = submited.contains(event.target);
-     
+   
 
     if (!isUserClicked) {
       document.getElementById("iuser").classList.remove("bluecolor"); 
@@ -865,12 +842,8 @@
       let clave = inpass.value;
 
       if ( correo == "elie@mail.com" && clave == "testpassword") {
-        
-          sessionStorage.setItem("correo", "elie@mail.com");
-          sessionStorage.setItem("clave", "testpassword");
-          inuser.innerHTML = sessionStorage.getItem("correo");
-          inuser.innerHTML = sessionStorage.getItem("clave");
- 
+  
+        sessionStorage.setItem("islogged", "true");
 
         document.getElementById('loginform').style.display = "none";
         document.getElementById('boxCliente').classList.remove('boxCliente');
@@ -884,7 +857,7 @@
  
 
     window.onload = (event) => {
-      if ( sessionStorage.getItem("correo") == "elie@mail.com" ){
+      if ( sessionStorage.getItem("islogged") == "true" ){
         document.getElementById('loginform').classList.add = "boxCliente";
         document.getElementById('boxCliente').classList.remove('boxCliente');
         document.getElementById('btnRComprar').classList.remove('boxCliente');
@@ -892,7 +865,315 @@
       } else {
         document.getElementById('loginform').classList.remove("boxCliente");
       }
+
+      function formatNumber (n) {
+                n = String(n).replace(/\D/g, "");
+            return n === '' ? n : Number(n).toLocaleString();
+      }
+
+      let carrito = [];
+      let total = 0;
+      const envioclp = 1500;
+      const productoclp = 350;
+      let envclp = 0;
+      let totalacomprar = 0;
+      let totalitem = 0;
+     
+     
+
+
+
+    //JSON=>Articulos
+    const baseDeDatos = [
+                {
+                    id: 1,
+                    titulo: 'Silla Gamer Color Rojo',
+                    precio: 249990,
+                    imagen: 'img/s1.jpg',
+                    stock: 5
+                },
+                {
+                    id: 2,
+                    titulo: 'Silla Gamer Color Celeste',
+                    precio: 169900,
+                    imagen: 'img/s2.jpg',
+                    stock: 5
+                },
+                {
+                    id: 3,
+                    titulo: 'Silla Gamer Color Rosada',
+                    precio: 134900,
+                    imagen: 'img/s3.jpg',
+                    stock: 5
+                },
+                {
+                    id: 4,
+                    titulo: 'Silla Gamer Color Blanca',
+                    precio: 159900,
+                    imagen: 'img/s4.jpg',
+                    stock: 5
+                },
+                {
+                    id: 5,
+                    titulo: 'Silla Gamer Color Azul',
+                    precio: 149900,
+                    imagen: 'img/s5.jpg',
+                    stock: 5
+                },
+                {
+                    id: 6,
+                    titulo: 'Silla Gamer Color Verde',
+                    precio: 119900,
+                    imagen: 'img/s6.jpg',
+                    stock: 5
+                }
+
+            ];
+
+            const DOMitems = document.querySelector('#items');
+            
+            const DOMcarrito = document.querySelector('#carrito');
+            const DOMtotal = document.querySelector('#totalArticulos');
+            const DOMcostoenvio = document.querySelector('#costoenv');
+            const DOMtotalcompra = document.querySelector('#totalcompra');
+            const DOMtotalitems = document.querySelector('#totalitm');
+            const DOMbtncomprar = document.querySelector('#btnRComprar');
+            const DOMbotonVaciar = document.querySelector('#boton-vaciar');
+            const miLocalStorage = window.localStorage;
+
+            // Funciones
+
+            /**
+            * Dibuja todos los productos a partir de la base de datos. No confundir con el carrito
+            */
+
+            function renderizarProductos() {
+                baseDeDatos.forEach((info) => {
+                    // Estructura
+                    const miNodo = document.createElement('section');
+                    miNodo.classList.add('producto');
+                    // Body
+                    const miNodoCardBody = document.createElement('figure');
+                    
+                    // Titulo
+                    const miNodoTitle = document.createElement('figcaption');
+                    // miNodoTitle.classList.add('card-title');
+                    miNodoTitle.textContent = info.titulo;
+                    // Imagen
+                    const miNodoImagen = document.createElement('img');
+                    miNodoImagen.setAttribute('src', info.imagen);
+                    // Precio
+                    const miNodoPrecio = document.createElement('span');
+                    miNodoPrecio.classList.add('precio');
+                    miNodoPrecio.textContent = `$ ${formatNumber(info.precio)}`;
+                    // Stock
+                    const miNodoStock = document.createElement('p');
+                    miNodoStock.classList.add('stock');
+                    miNodoStock.textContent = `${info.stock} unidades disponibles`;
+                    // Boton 
+                    const miNodoBoton = document.createElement('button');
+                    miNodoBoton.classList.add('btnCrt', 'btnagregar');
+                    miNodoBoton.textContent = 'Añadir al carrito';
+                    miNodoBoton.setAttribute('marcador', info.id);
+                    // Unidades disponibles
+                    const miNodoDisponibles = document.createElement('p');
+                    miNodoDisponibles.classList.add('encarrito');
+                    miNodoDisponibles.innerHTML = `Tiene <span id="numen"><b>0</b></span> unidades en el carrito de compras`;
+                    miNodoBoton.addEventListener('click', anyadirProductoAlCarrito);
+                    // Insertamos
+                    miNodoCardBody.appendChild(miNodoImagen);
+                    miNodoCardBody.appendChild(miNodoTitle);
+                    miNodoCardBody.appendChild(miNodoPrecio);
+                    miNodoCardBody.appendChild(miNodoStock);
+                    miNodoCardBody.appendChild(miNodoBoton);
+                    miNodoCardBody.appendChild(miNodoDisponibles);
+                    miNodo.appendChild(miNodoCardBody);
+                    DOMitems.appendChild(miNodo);
+                });
+            }
+
+            /**
+            * Evento para añadir un producto al carrito de la compra
+            */
+            function anyadirProductoAlCarrito(evento) {
+                // Anyadimos el Nodo a nuestro carrito
+                carrito.push(evento.target.getAttribute('marcador'))
+                // Calculo el total
+                calcularTotal();
+                // Actualizamos el carrito 
+                renderizarCarrito();
+                // Actualizamos el LocalStorage
+                guardarCarritoEnLocalStorage();
+            }
+
+            /**
+            * Dibuja todos los productos guardados en el carrito
+            */
+            function renderizarCarrito() {
+                // Vaciamos todo el html
+                DOMcarrito.textContent = '';
+                // Quitamos los duplicados
+                const carritoSinDuplicados = [...new Set(carrito)];
+                // Generamos los Nodos a partir de carrito
+                carritoSinDuplicados.forEach((item) => {
+                    // Obtenemos el item que necesitamos de la variable base de datos
+                    const miItem = baseDeDatos.filter((itemBaseDatos) => {
+                        // ¿Coincide las id? Solo puede existir un caso
+                        return itemBaseDatos.id === parseInt(item);
+                    });
+                    // Cuenta el número de veces que se repite el producto
+                    const numeroUnidadesItem = carrito.reduce((total, itemId) => {
+                        // ¿Coincide las id? Incremento el contador, en caso contrario no mantengo
+                        return itemId === item ? total += 1 : total;
+                    }, 0);
+
+                    let multiplicar = numeroUnidadesItem * miItem[0].precio;
+                    
+                    // Creamos el nodo del item del carrito
+                    const miNodo = document.createElement('li');
+                    miNodo.classList.add('list-group-item', 'text-right', 'mx-2');
+                    
+                   miNodo.innerHTML = `<div class="asideboxArticulo userbox">
+                            <div class="avatarcart">
+                              <img src="${miItem[0].imagen}" data-demo-src="${miItem[0].imagen}" alt="">
+                            </div>
+                            <div class="metadataArticulo">
+                                <span>${miItem[0].titulo}</span>
+                                <span>$ ${formatNumber(miItem[0].precio)}</span>
+                                <span>${numeroUnidadesItem} unidades</span>
+                                <span>Total $ ${formatNumber(multiplicar)}  </span>  
+                            </div>
+                            <div id="hover">
+                              <i id="iuser" class="fa fa-trash boxiconcart" aria-hidden="true"></i>
+                              <div id="popup">Quitar</div>          
+                            </div> 
+                          </div>`;
+                    
+
+                  
+                    // Boton de borrar
+                    // const miBoton = document.createElement('button');
+                    // miBoton.classList.add('btn', 'btn-danger', 'mx-5');
+                    // miBoton.textContent = 'X';
+                    // miBoton.style.marginLeft = '1rem';
+                    // miBoton.dataset.item = item;
+                    // miBoton.addEventListener('click', borrarItemCarrito);
+                    // Mezclamos nodos
+                    // miNodo.appendChild(miBoton);
+                    DOMcarrito.appendChild(miNodo);
+                    
+                    if ( sessionStorage.getItem("islogged") == "true" ){
+                      DOMbtncomprar.classList.remove("btnagregado");
+                      DOMbtncomprar.classList.add("btnagregar", "titleBtn");
+                    }
+                    
+                });
+            }
+
+            /**
+            * Evento para borrar un elemento del carrito
+            */
+            function borrarItemCarrito(evento) {
+                // Obtenemos el producto ID que hay en el boton pulsado
+                const id = evento.target.dataset.item;
+                // Borramos todos los productos
+                carrito = carrito.filter((carritoId) => {
+                    return carritoId !== id;
+                });
+                // volvemos a renderizar
+                renderizarCarrito();
+                // Calculamos de nuevo el precio
+                calcularTotal();
+                // Actualizamos el LocalStorage
+                guardarCarritoEnLocalStorage();
+
+            }
+
+            /**
+            * Calcula el precio total teniendo en cuenta los productos repetidos
+            */
+            function calcularTotal() {
+                // Limpiamos precio anterior
+                total = 0;
+                totalacomprar = 0;
+                totalitem = 0;
+                
+                // Recorremos el array del carrito
+
+                carrito.forEach((item) => {   
+                    // De cada elemento obtenemos su precio
+                    const miItem = baseDeDatos.filter((itemBaseDatos) => {
+                        return itemBaseDatos.id === parseInt(item);
+                    });
+                    total = total + miItem[0].precio;
+                });
+
+                 
+                if ( carrito.length == 0 ) {
+                  envclp = 0;
+                } else {
+                  envclp = envioclp + (productoclp * carrito.length);
+                  totalacomprar = envclp + total;
+                }
+ 
+                // Renderizamos el precio en el HTML
+                DOMtotal.textContent = `$${formatNumber(total.toFixed(0))}`;
+                DOMcostoenvio.textContent = `$${formatNumber(envclp.toFixed(0))}`;
+                DOMtotalcompra.textContent = `$${formatNumber(totalacomprar.toFixed(0))}`;
+                DOMtotalitems.textContent = carrito.length;
+                
+
+            }
+
+            /**
+            * Varia el carrito y vuelve a dibujarlo
+            */
+            function vaciarCarrito() {
+                // Limpiamos los productos guardados
+                carrito = [];
+
+                // Desactivamos el botón comprar
+                
+                if ( sessionStorage.getItem("islogged") == "true" ){
+                  DOMbtncomprar.classList.remove("btnagregar", "titleBtn");
+                  DOMbtncomprar.classList.add("btnagregado");
+                } else {
+                  DOMbtncomprar.classList.add("boxCliente");
+                }
+               
+                // Renderizamos los cambios
+                renderizarCarrito();
+                calcularTotal();
+                // Borra LocalStorage
+                localStorage.clear();
+
+            }
+
+            function guardarCarritoEnLocalStorage () {
+                miLocalStorage.setItem('carrito', JSON.stringify(carrito));
+            }
+
+            function cargarCarritoDeLocalStorage () {
+                // ¿Existe un carrito previo guardado en LocalStorage?
+                if (miLocalStorage.getItem('carrito') !== null) {
+                    // Carga la información
+                    carrito = JSON.parse(miLocalStorage.getItem('carrito'));
+                }
+            }
+
+            // Eventos
+            DOMbotonVaciar.addEventListener('click', vaciarCarrito);
+
+            //Inicio
+            cargarCarritoDeLocalStorage();
+            renderizarProductos();
+            calcularTotal();
+            renderizarCarrito();
+
+      
     };
+
+  
    </script>
 </body>
 </html>

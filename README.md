@@ -105,10 +105,16 @@ Se añade vista esquemática del proyecto, esto es solo a modo de recomendación
       - [x] ~~persistir sesión de usuario al refrescar la página~~
       - [x] ~~hacer que el botón realizar compra, sólo esté visible si está logueado~~
    - [ ] Articulos
-      - [ ] Crear Clase Articulos
-      - [ ] Crear JSON de Articulos
-      - [ ] Crear objetos de la clase articulos desde el JSON
-      - [ ] cargar objetos en vista usuario
-   - [ ] Carrito
-      - [ ] Añadir producto seleccionado al carrito
+      - [x] ~~Crear JSON de Articulos~~
+      - [x] ~~Crear objetos de la clase articulos desde el JSON~~
+      - [x] ~~cargar objetos en vista usuario~~
+      - [x] ~~funcion para añadir eventos al carrito~~
+   - [] Carrito
+      - [x] ~~Crear objeto carrito~~
+      - [x] ~~Crear variable total~~
+      - [x] ~~Crear constante total del DOM~~
+      - [x] ~~Crear constante restaurar del DOM~~
+      - [x] ~~Crear constante localStorage~~
+      - [x] ~~Añadir producto seleccionado al carrito~~
+      - [ ] limitar la cantidad de items agregados al total disponible
 
