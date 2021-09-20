@@ -16,7 +16,7 @@ Se debe realizar en modo SPA (Single Page Application) una tienda de comercio el
 ~~Cada producto debe tener 1 imagen, 1 título, 1 precio y stock disponible (entre 1 y 5 unidades).~~<br />
 ~~Cada producto debe indicar si ese producto se encuentra  en el carro de compras y en qué cantidad, permitiendo añadir más del mismo ítem.~~<br />
 ~~El usuario no debe ser capaz de solicitar una cantidad mayor a la disponible.~~<br />
-El stock de productos debe persistir ante la recarga de la página y si el usuario sale del sitio.<br />
+~~El stock de productos debe persistir ante la recarga de la página y si el usuario sale del sitio.<br />~~
 ~~El carro de compra debe persistir sus datos aún cuando el usuario realice una recarga de la página o si el usuario sale del sitio.~~<br />
 ~~El carro de compra debe calcular el total de la compra en base al valor de los productos seleccionados, añadir un costo de $1500CLP por envío (US$ 2) y $350CLP (US$0,5) por cada producto.~~<br />
 ~~El carro de compra debe tener un botón de compra, que solo debe estar habilitado si el usuario ha iniciado sesión.~~<br />
