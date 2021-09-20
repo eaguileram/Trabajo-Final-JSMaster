@@ -772,6 +772,7 @@
     let submited = document.getElementById('submit');
     
     
+    
 
     for (let i = 0; i < btadd.length; i++) {
         btadd[i].addEventListener('click', function(event) {
@@ -782,6 +783,9 @@
             msgtoasty(0);
         });
     }
+
+  
+    
 
     document.addEventListener('click', function(event) {
     event.preventDefault();
@@ -869,11 +873,26 @@
         document.getElementById('boxCliente').classList.remove('boxCliente');
         document.getElementById('btnRComprar').classList.remove('boxCliente');
         document.getElementById('btnRComprar').classList.remove('boxCliente');
+        
+        validarCarrito();
+
         msgtoasty(3);
+        
         
       } else {
         msgtoasty(1);
       }
+    }
+
+    function validarCarrito() {
+      const DOMtotal = document.querySelector('#totalArticulos');
+        if (DOMtotal.textContent !=  "$0") {
+          document.getElementById('btnRComprar').classList.remove("btnagregado");
+          document.getElementById('btnRComprar').classList.add("btnagregar");
+        } else {
+          document.getElementById('btnRComprar').classList.remove("btnagregar");
+          document.getElementById('btnRComprar').classList.add("btnagregado");
+        }
     }
  
 
@@ -892,6 +911,8 @@
             return n === '' ? n : Number(n).toLocaleString();
       }
 
+    
+
       let carrito = [];
       let total = 0;
       const envioclp = 1500;
@@ -899,11 +920,9 @@
       let envclp = 0;
       let totalacomprar = 0;
       let totalitem = 0;
+      let max = Infinity;
      
-     
-
-
-
+      
     //JSON=>Articulos
     const baseDeDatos = [
                 {
@@ -911,21 +930,21 @@
                     titulo: 'Silla Gamer Color Rojo',
                     precio: 249990,
                     imagen: 'img/s1.jpg',
-                    stock: 5
+                    stock: 2
                 },
                 {
                     id: 2,
                     titulo: 'Silla Gamer Color Celeste',
                     precio: 169900,
                     imagen: 'img/s2.jpg',
-                    stock: 5
+                    stock: 3
                 },
                 {
                     id: 3,
                     titulo: 'Silla Gamer Color Rosada',
                     precio: 134900,
                     imagen: 'img/s3.jpg',
-                    stock: 5
+                    stock: 4
                 },
                 {
                     id: 4,
@@ -961,6 +980,10 @@
             const DOMbtncomprar = document.querySelector('#btnRComprar');
             const DOMbotonVaciar = document.querySelector('#boton-vaciar');
             const miLocalStorage = window.localStorage;
+            
+
+            
+            
 
             // Funciones
 
@@ -999,7 +1022,7 @@
                     // Unidades disponibles
                     const miNodoDisponibles = document.createElement('p');
                     miNodoDisponibles.classList.add('encarrito');
-                    miNodoDisponibles.innerHTML = `Tiene <span id="numen"><b>0</b></span> unidades en el carrito de compras`;
+                    miNodoDisponibles.innerHTML = `Tiene <span class="numCart" id="art-${info.id}"><b>0</b></span> unidades en el carrito de compras`;
                     miNodoBoton.addEventListener('click', anyadirProductoAlCarrito);
                     // Insertamos
                     miNodoCardBody.appendChild(miNodoImagen);
@@ -1018,13 +1041,45 @@
             */
             function anyadirProductoAlCarrito(evento) {
               let total = 0;
+
+              const carritoSinDuplicados = [...new Set(carrito)];
               // Cuenta el número de veces que se repite el producto
               const numeroUnidadesItem = carrito.reduce((total, itemId) => {
                       
                       // ¿Coincide las id? Incremento el contador, en caso contrario no mantengo
+
+                      // Obtenemos stock del item
+                    let itemStock = [];
+                     // Obtenemos el item que necesitamos de la variable base de datos
+                     const miItemStock = baseDeDatos.filter((itemBaseDatos) => {
+                        // ¿Coincide las id? Solo puede existir un caso
+                       if ( itemBaseDatos.id === parseInt(itemId)){
+                         itemStock = itemBaseDatos.stock;
+                         return itemStock;
+                       }
+                        
+                    });
+
+
+                    let isJson = JSON.stringify(miItemStock);
+                    let obj = JSON.parse(isJson);
+
+                    function printValues(obj) {
+                        for(var k in obj) {
+                            if(obj[k] instanceof Object) {
+                              let num = obj[k].stock;
+                              return num;
+                            } else {
+                              let num = obj[k].stock;
+                              return num;
+                            };
+                        }
+                    };
+
+                    max = printValues(obj);
                      
                       
-                      if (itemId === evento.target.getAttribute('marcador') && total < 5) {
+                      if (itemId === evento.target.getAttribute('marcador') && total < printValues(obj)) {
                         total += 1; 
                         return total;
                       }else{
@@ -1036,7 +1091,7 @@
               
               // Anyadimos el Nodo a nuestro carrito
 
-              if ( numeroUnidadesItem < 5) {
+              if ( numeroUnidadesItem < max) {
               
                 carrito.push(evento.target.getAttribute('marcador'));
                 msgtoasty(0);
@@ -1067,22 +1122,57 @@
                     // Obtenemos el item que necesitamos de la variable base de datos
                     const miItem = baseDeDatos.filter((itemBaseDatos) => {
                         // ¿Coincide las id? Solo puede existir un caso
+                       
                         return itemBaseDatos.id === parseInt(item);
                     });
-                    
+
+                    // Obtenemos stock del item
+                    let itemStock = [];
+                     // Obtenemos el item que necesitamos de la variable base de datos
+                     const miItemStock = baseDeDatos.filter((itemBaseDatos) => {
+                        // ¿Coincide las id? Solo puede existir un caso
+                       if ( itemBaseDatos.id === parseInt(item)){
+                         itemStock = itemBaseDatos.stock;
+                         return itemStock;
+                       }
+                        
+                    });
+
+
+                    let isJson = JSON.stringify(miItemStock);
+                    let obj = JSON.parse(isJson);
+
+                    function printValues(obj) {
+                        for(var k in obj) {
+                            if(obj[k] instanceof Object) {
+                              let num = obj[k].stock;
+                              return num;
+                            } else {
+                              let num = obj[k].stock;
+                              return num;
+                            };
+                        }
+                    };
+               
+                 
                     // Cuenta el número de veces que se repite el producto
-                    const numeroUnidadesItem = carrito.reduce((total, itemId) => {
+                    const numeroUnidadesItem = carrito.reduce((total, itemId, itemStock) => {
                       
                         // ¿Coincide las id? Incremento el contador, en caso contrario no mantengo
-                       
+                      
                         
-                        if (itemId === item && total < 5) {
+                        if (itemId === item && total < printValues(obj)) {
                           total += 1; 
                           return total;
                         }else{
                           return total;
                         } 
                     }, 0);
+
+                    
+
+
+                
              
                     let multiplicar = numeroUnidadesItem * miItem[0].precio;
                     
@@ -1102,6 +1192,9 @@
                             </div>
                     </div>`;
                     
+                    let id = `art-${miItem[0].id}`;
+                    let encarrito = document.getElementById(id);
+                    encarrito.textContent = numeroUnidadesItem;
 
                   
                     // Boton de borrar
@@ -1132,12 +1225,20 @@
                 carrito = carrito.filter((carritoId) => {
                     return carritoId !== id;
                 });
+
+                
+                // volmemos a renderizar los productos
+                renderizarProductos();
+
                 // volvemos a renderizar
                 renderizarCarrito();
                 // Calculamos de nuevo el precio
                 calcularTotal();
                 // Actualizamos el LocalStorage
                 guardarCarritoEnLocalStorage();
+                validarCarrito();
+
+                
 
             }
 
@@ -1187,6 +1288,11 @@
                 // Limpiamos los productos guardados
                 carrito = [];
 
+                // Limpiamos los productos del DOM
+                // Vaciamos todo el html
+                DOMitems.textContent = '';
+
+                
                 // Desactivamos el botón comprar
                 
                 if ( sessionStorage.getItem("islogged") == "true" ){
@@ -1196,11 +1302,18 @@
                   DOMbtncomprar.classList.add("boxCliente");
                 }
                
+                // volmemos a renderizar los productos
+
+                renderizarProductos();
+                
                 // Renderizamos los cambios
                 renderizarCarrito();
+                // volmemos a renderizar los productos
+             
                 calcularTotal();
                 // Borra LocalStorage
                 localStorage.clear();
+                
 
             }
 
@@ -1220,6 +1333,8 @@
             DOMbotonVaciar.addEventListener('click', vaciarCarrito);
 
             //Inicio
+            
+            validarCarrito();
             cargarCarritoDeLocalStorage();
             renderizarProductos();
             calcularTotal();

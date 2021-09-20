@@ -118,6 +118,9 @@ Se añade vista esquemática del proyecto, esto es solo a modo de recomendación
       - [x] ~~Añadir producto seleccionado al carrito~~
       - [x] ~~limitar la cantidad de items agregados al total disponible~~
       - [x] ~~quitar producto del carrito~~
-      - [ ] limitar la cantidad de items dinámicamente, usando stock de la DB
-      - [ ] mostrar unidades en el carrito en el DOMProductos
+      - [x] ~~limitar la cantidad de items dinámicamente, usando stock de la DB~~
+      - [x] ~~mostrar unidades agregadas en el carrito en el DOMProductos~~
+      - [x] ~~al vaciar, limpiar unidades en carrito desde el DOMProductos~~
+      - [x] ~~mostrar botón realizar compra si se loguea y productos en carrito no es igual a $0~~
+      - [x] ~~inactivar botón realizar compra si se quita producto del carrito y queda vacío~~
 
