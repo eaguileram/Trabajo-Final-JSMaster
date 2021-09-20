@@ -605,6 +605,20 @@
           opacity: 1;
           border:none;
       }
+    
+      .rock{
+        border: none!important;
+        background: transparent!important;
+      }
+      .rock::before {
+          width: 50px;
+          height: 50px;
+          content: url(data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22currentColor%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20class%3D%22feather%20feather-trash-2%22%3E%3Cpolyline%20points%3D%223%206%205%206%2021%206%22%3E%3C%2Fpolyline%3E%3Cpath%20d%3D%22M19%206v14a2%202%200%200%201-2%202H7a2%202%200%200%201-2-2V6m3%200V4a2%202%200%200%201%202-2h4a2%202%200%200%201%202%202v2%22%3E%3C%2Fpath%3E%3Cline%20x1%3D%2210%22%20y1%3D%2211%22%20x2%3D%2210%22%20y2%3D%2217%22%3E%3C%2Fline%3E%3Cline%20x1%3D%2214%22%20y1%3D%2211%22%20x2%3D%2214%22%20y2%3D%2217%22%3E%3C%2Fline%3E%3C%2Fsvg%3E);
+          border: none!important;
+          background: transparent!important;
+          }
+
+      
  
     
       @media (min-width: 2000px) { article{ grid-template-columns: 1fr 1fr 1fr 1fr;} }
@@ -661,7 +675,7 @@
    
           <!-- Listado de Artículos -->
           
-            <ul id="carrito" class="list-group"></ul>
+            <ul id="carrito"></ul>
                 
                
           
@@ -699,7 +713,7 @@
           <!-- Botón Comprar -->
           <div class="asideboxArticuloDetalle">
             <div class="carticonbox">
-              <button class="boxCliente btnagregar titleBtn" id="btnRComprar" disabled>Realizar Compra</button>
+              <button class="boxCliente btnagregado titleBtn" id="btnRComprar" disabled>Realizar Compra</button>
             </div>
           </div>
           <!-- Mensaje Compra Exitosa -->
@@ -829,6 +843,12 @@
           document.getElementById('img').innerHTML = '<i class="fa fa-check boxicon" aria-hidden="true"></i>';
           document.getElementById('desc').innerHTML = "logueado exitosamente";
           resolve(launch_toast());
+         } else if ( n == 4 ) {
+          document.getElementById('toast').style.backgroundColor = 'black';
+          document.getElementById('img').style.backgroundColor = 'black';
+          document.getElementById('img').innerHTML = '<i class="fa fa-check boxicon" aria-hidden="true"></i>';
+          document.getElementById('desc').innerHTML = "máximo alcanzado";
+          resolve(launch_toast());
          }
          else
             reject('Error de ejecución')
@@ -847,6 +867,7 @@
 
         document.getElementById('loginform').style.display = "none";
         document.getElementById('boxCliente').classList.remove('boxCliente');
+        document.getElementById('btnRComprar').classList.remove('boxCliente');
         document.getElementById('btnRComprar').classList.remove('boxCliente');
         msgtoasty(3);
         
@@ -996,14 +1017,41 @@
             * Evento para añadir un producto al carrito de la compra
             */
             function anyadirProductoAlCarrito(evento) {
-                // Anyadimos el Nodo a nuestro carrito
-                carrito.push(evento.target.getAttribute('marcador'))
+              let total = 0;
+              // Cuenta el número de veces que se repite el producto
+              const numeroUnidadesItem = carrito.reduce((total, itemId) => {
+                      
+                      // ¿Coincide las id? Incremento el contador, en caso contrario no mantengo
+                     
+                      
+                      if (itemId === evento.target.getAttribute('marcador') && total < 5) {
+                        total += 1; 
+                        return total;
+                      }else{
+                        return total;
+                      } 
+                  }, 0);
+
+             
+              
+              // Anyadimos el Nodo a nuestro carrito
+
+              if ( numeroUnidadesItem < 5) {
+              
+                carrito.push(evento.target.getAttribute('marcador'));
+                msgtoasty(0);
+
                 // Calculo el total
                 calcularTotal();
                 // Actualizamos el carrito 
                 renderizarCarrito();
                 // Actualizamos el LocalStorage
                 guardarCarritoEnLocalStorage();
+              }else{
+                msgtoasty(4);
+                // Actualizamos el carrito 
+                renderizarCarrito();
+              }
             }
 
             /**
@@ -1021,19 +1069,28 @@
                         // ¿Coincide las id? Solo puede existir un caso
                         return itemBaseDatos.id === parseInt(item);
                     });
+                    
                     // Cuenta el número de veces que se repite el producto
                     const numeroUnidadesItem = carrito.reduce((total, itemId) => {
+                      
                         // ¿Coincide las id? Incremento el contador, en caso contrario no mantengo
-                        return itemId === item ? total += 1 : total;
+                       
+                        
+                        if (itemId === item && total < 5) {
+                          total += 1; 
+                          return total;
+                        }else{
+                          return total;
+                        } 
                     }, 0);
-
+             
                     let multiplicar = numeroUnidadesItem * miItem[0].precio;
                     
                     // Creamos el nodo del item del carrito
                     const miNodo = document.createElement('li');
-                    miNodo.classList.add('list-group-item', 'text-right', 'mx-2');
+                    miNodo.classList.add("userbox");
                     
-                   miNodo.innerHTML = `<div class="asideboxArticulo userbox">
+                    miNodo.innerHTML = `<div class="asideboxArticulo userbox">
                             <div class="avatarcart">
                               <img src="${miItem[0].imagen}" data-demo-src="${miItem[0].imagen}" alt="">
                             </div>
@@ -1043,26 +1100,21 @@
                                 <span>${numeroUnidadesItem} unidades</span>
                                 <span>Total $ ${formatNumber(multiplicar)}  </span>  
                             </div>
-                            <div id="hover">
-                              <i id="iuser" class="fa fa-trash boxiconcart" aria-hidden="true"></i>
-                              <div id="popup">Quitar</div>          
-                            </div> 
-                          </div>`;
+                    </div>`;
                     
 
                   
                     // Boton de borrar
-                    // const miBoton = document.createElement('button');
-                    // miBoton.classList.add('btn', 'btn-danger', 'mx-5');
-                    // miBoton.textContent = 'X';
-                    // miBoton.style.marginLeft = '1rem';
-                    // miBoton.dataset.item = item;
-                    // miBoton.addEventListener('click', borrarItemCarrito);
-                    // Mezclamos nodos
-                    // miNodo.appendChild(miBoton);
+                    const miBoton = document.createElement('button');
+                    miBoton.classList.add("rock");
+                    miBoton.dataset.item = item;
+                    miBoton.addEventListener('click', borrarItemCarrito);
+                   // Mezclamos nodos
+                    miNodo.appendChild(miBoton);
                     DOMcarrito.appendChild(miNodo);
-                    
-                    if ( sessionStorage.getItem("islogged") == "true" ){
+                  
+                  
+                    if ( sessionStorage.getItem("islogged") == "true"){
                       DOMbtncomprar.classList.remove("btnagregado");
                       DOMbtncomprar.classList.add("btnagregar", "titleBtn");
                     }
@@ -1101,11 +1153,14 @@
                 // Recorremos el array del carrito
 
                 carrito.forEach((item) => {   
+                  
                     // De cada elemento obtenemos su precio
                     const miItem = baseDeDatos.filter((itemBaseDatos) => {
                         return itemBaseDatos.id === parseInt(item);
                     });
-                    total = total + miItem[0].precio;
+                   
+                      total = total + miItem[0].precio;
+                   
                 });
 
                  
