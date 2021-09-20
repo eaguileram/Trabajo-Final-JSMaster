@@ -104,12 +104,12 @@ Se añade vista esquemática del proyecto, esto es solo a modo de recomendación
       - [x] ~~si es correcto, ocultar login y mostrar nombre~~
       - [x] ~~persistir sesión de usuario al refrescar la página~~
       - [x] ~~hacer que el botón realizar compra, sólo esté visible si está logueado~~
-   - [ ] Articulos
+   - [x] ~~-Articulos~~
       - [x] ~~Crear JSON de Articulos~~
       - [x] ~~Crear objetos de la clase articulos desde el JSON~~
       - [x] ~~cargar objetos en vista usuario~~
       - [x] ~~funcion para añadir eventos al carrito~~
-   - [ ] Carrito
+   - [x] ~~Carrito~~
       - [x] ~~Crear objeto carrito~~
       - [x] ~~Crear variable total~~
       - [x] ~~Crear constante total del DOM~~
@@ -123,4 +123,15 @@ Se añade vista esquemática del proyecto, esto es solo a modo de recomendación
       - [x] ~~al vaciar, limpiar unidades en carrito desde el DOMProductos~~
       - [x] ~~mostrar botón realizar compra si se loguea y productos en carrito no es igual a $0~~
       - [x] ~~inactivar botón realizar compra si se quita producto del carrito y queda vacío~~
+   -[ ] Comprar
+      - [ ] Al presionar el botón realizar compra, simular promesa de 3 segundos
+        - [ ] mostrar mensaje que se está realizando la compra
+        - [ ] desactivar botones añadir al carrito mientras dure el proceso
+        - [ ] cumplida la promesa, vaciar carrito
+        - [ ] vaciado el carrito, mostrar mensaje de compra exitosa
+        - [ ] Permitir al usuario volver a comprar
+          - [ ] Stock
+              - [ ] descontar stock general del JSON
+              - [ ] si stock producto es 0, desactivar botón añadir al carrito
+                - [ ] mostrar mensaje en el botón: sin stock disponible
 
