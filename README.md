@@ -123,7 +123,7 @@ Se añade vista esquemática del proyecto, esto es solo a modo de recomendación
       - [x] ~~al vaciar, limpiar unidades en carrito desde el DOMProductos~~
       - [x] ~~mostrar botón realizar compra si se loguea y productos en carrito no es igual a $0~~
       - [x] ~~inactivar botón realizar compra si se quita producto del carrito y queda vacío~~
-   -[ ] Comprar
+   - [ ] Comprar
       - [ ] Al presionar el botón realizar compra, simular promesa de 3 segundos
         - [ ] mostrar mensaje que se está realizando la compra
         - [ ] desactivar botones añadir al carrito mientras dure el proceso
