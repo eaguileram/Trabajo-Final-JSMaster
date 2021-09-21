@@ -124,14 +124,17 @@ Se añade vista esquemática del proyecto, esto es solo a modo de recomendación
       - [x] ~~mostrar botón realizar compra si se loguea y productos en carrito no es igual a $0~~
       - [x] ~~inactivar botón realizar compra si se quita producto del carrito y queda vacío~~
    - [ ] Comprar
-      - [ ] Al presionar el botón realizar compra, simular promesa de 3 segundos
-        - [ ] mostrar mensaje que se está realizando la compra
-        - [ ] desactivar botones añadir al carrito mientras dure el proceso
-        - [ ] cumplida la promesa, vaciar carrito
-        - [ ] vaciado el carrito, mostrar mensaje de compra exitosa
-        - [ ] Permitir al usuario volver a comprar
+      - [x] ~~Al presionar el botón realizar compra, simular promesa de 3 segundos~~
+        - [x] ~~ocultar botón realizar compra~~
+        - [x] ~~mostrar mensaje que se está realizando la compra~~
+        - [x] ~~desactivar botones añadir al carrito mientras dure el proceso~~
+        - [x] ~~cumplida la promesa, vaciar carrito~~
+        - [x] ~~1.1 vaciado el carrito, mostrar mensaje de compra exitosa~~
+        - [x] ~~1.2 Permitir al usuario volver a comprar~~
           - [ ] Stock
-              - [ ] descontar stock general del JSON
-              - [ ] si stock producto es 0, desactivar botón añadir al carrito
-                - [ ] mostrar mensaje en el botón: sin stock disponible
+              - [ ] 2.1 descontar stock general del LocalStorage (depende de 1.1)
+              - [ ] 2.2 si stock producto es 0, desactivar botón añadir al carrito
+                - [ ] 2.3 mostrar mensaje en el botón: sin stock disponible
+
+                
 

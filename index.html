@@ -713,16 +713,16 @@
           <!-- Botón Comprar -->
           <div class="asideboxArticuloDetalle">
             <div class="carticonbox">
-              <button class="boxCliente btnagregado titleBtn" id="btnRComprar" disabled>Realizar Compra</button>
+              <button class="boxCliente btnagregado titleBtn" id="btnRComprar" type="submit" disabled>Realizar Compra</button>
             </div>
           </div>
           <!-- Mensaje Compra Exitosa -->
-          <div class="asideboxArticuloDetalle boxCliente">
+          <div id="msgCustom" class="asideboxArticuloDetalle boxCliente">
             <div class="carticonbox">
-              <span><i class="fa fa-check-circle boxicon boxshop boxcheck" aria-hidden="true"></i></span>
+              <span><i id="imsg" class="fa fa-check-circle boxicon boxshop boxcheck" aria-hidden="true"></i></span>
             </div>
             <div class="carticonbox titleBtn titleCompra ">
-              <span >¡Gracias por tu compra!</span>
+              <span id="msgCompra" >¡Gracias por tu compra!</span>
             </div>
           </div>
         </div>
@@ -752,6 +752,7 @@
                 </div>
                 <div class="carticonbox">
                   <button id="boton-vaciar" class="btnagregar titleBtn">Restaurar productos</button>
+                  <button id="boton-vaciar-stock" type="submit" class="btnagregar titleBtn boxCliente">vaciar stock</button>
                 </div>
             </div>
           </div>
@@ -770,6 +771,8 @@
     let passtxt = document.getElementById('passTxt');
     let btadd = document.querySelectorAll('.btnCrt');
     let submited = document.getElementById('submit');
+    let btnall = document.getElementsByTagName('button');
+    let comprado = false;
     
     
     
@@ -853,6 +856,12 @@
           document.getElementById('img').innerHTML = '<i class="fa fa-check boxicon" aria-hidden="true"></i>';
           document.getElementById('desc').innerHTML = "máximo alcanzado";
           resolve(launch_toast());
+         } else if ( n == 5 ) {
+          document.getElementById('toast').style.backgroundColor = '#0023ff';
+          document.getElementById('img').style.backgroundColor = '#0023ff';
+          document.getElementById('img').innerHTML = '<i class="fa fa-smile-o boxicon" aria-hidden="true"></i>';
+          document.getElementById('desc').innerHTML = "Compra exitosa";
+          resolve(launch_toast());
          }
          else
             reject('Error de ejecución')
@@ -860,41 +869,129 @@
       return p;
     }
 
-    function validarLogin(){
-   
-      let correo = inuser.value;
-      let clave = inpass.value;
+      function validarLogin(){
+    
+        let correo = inuser.value;
+        let clave = inpass.value;
 
-      if ( correo == "elie@mail.com" && clave == "testpassword") {
-  
-        sessionStorage.setItem("islogged", "true");
+        if ( correo == "elie@mail.com" && clave == "testpassword") {
+    
+          sessionStorage.setItem("islogged", "true");
 
-        document.getElementById('loginform').style.display = "none";
-        document.getElementById('boxCliente').classList.remove('boxCliente');
-        document.getElementById('btnRComprar').classList.remove('boxCliente');
-        document.getElementById('btnRComprar').classList.remove('boxCliente');
-        
-        validarCarrito();
+          document.getElementById('loginform').style.display = "none";
+          document.getElementById('boxCliente').classList.remove('boxCliente');
+          document.getElementById('btnRComprar').classList.remove('boxCliente');
+          document.getElementById('btnRComprar').classList.remove('boxCliente');
+          
+          validarCarrito();
 
-        msgtoasty(3);
-        
-        
-      } else {
-        msgtoasty(1);
-      }
-    }
-
-    function validarCarrito() {
-      const DOMtotal = document.querySelector('#totalArticulos');
-        if (DOMtotal.textContent !=  "$0") {
-          document.getElementById('btnRComprar').classList.remove("btnagregado");
-          document.getElementById('btnRComprar').classList.add("btnagregar");
+          msgtoasty(3);
+          
+          
         } else {
-          document.getElementById('btnRComprar').classList.remove("btnagregar");
-          document.getElementById('btnRComprar').classList.add("btnagregado");
+          msgtoasty(1);
         }
+      }
+
+      function validarCarrito() {
+        const DOMtotal = document.querySelector('#totalArticulos');
+          if (DOMtotal.textContent !=  "$0") {
+            document.getElementById('btnRComprar').classList.remove("btnagregado");
+            document.getElementById('btnRComprar').classList.add("btnagregar");
+            document.getElementById('btnRComprar').disabled = false;
+          } else {
+            document.getElementById('btnRComprar').classList.remove("btnagregar");
+            document.getElementById('btnRComprar').classList.add("btnagregado");
+            document.getElementById('btnRComprar').disabled = true;
+          }
+      }
+
+      
+      function desactivarBotones() {
+        const btns = Object.keys(btnall);
+        btns.forEach((key, index) => {
+          btnall[key].disabled = true;
+        });
+      }
+
+      function activarBotones() {
+        const btns = Object.keys(btnall);
+        btns.forEach((key, index) => {
+          btnall[key].disabled = false;
+        });
+      }
+
+      
+
+
+        let p = new Promise((resolve, reject) => {
+            setTimeout(() => {
+                resolve(document.getElementById('msgCompra').textContent = "Realizando Transacción");
+            }, 3 * 100);
+        });
+
+      function changeIcon(){
+        document.getElementById('imsg').classList.remove('fa-exchange');
+        document.getElementById('imsg').classList.add('fa-check-circle');
+        document.getElementById('msgCompra').textContent = "Compra Exitosa";
+      }
+
+      function transaccion() {
+         
+          p.then((result) => {
+              console.log((document.getElementById('msgCompra').textContent = "Realizando Transacción"));
+              return new Promise((resolve, reject) => {
+                  setTimeout(() => {
+                      resolve(changeIcon());
+                  }, 3 * 1000);
+              });
+          }).then((result) => {
+              console.log(result);
+              return new Promise((resolve, reject) => {
+                  setTimeout(() => {
+                      resolve(activarBotones(), DOMbotonVaciarX.click());
+                  }, 0);
+              });
+          }).then(result => msgtoasty(5));
+      }
+    
+
+     function prevenirActualizar() {
+      document.addEventListener('keydown', (e) => {
+          e = e || window.event;
+          if(e.keyCode == 116 || e.keyCode == 82){
+              e.preventDefault();
+          }
+      });
     }
- 
+      
+    
+      function disableClicks() {
+        cont.style.pointerEvents = "none";
+      }
+
+      function enableClicks() {
+        cont.style.pointerEvents = "auto";
+      }
+      const DOMbotonVaciarX = document.querySelector('#boton-vaciar-stock');
+
+      window.addEventListener('DOMContentLoaded', function() {
+        
+        
+        document.getElementById('btnRComprar').addEventListener("click", () => {
+        document.getElementById('btnRComprar').classList.add('boxCliente');
+        desactivarBotones()
+        prevenirActualizar();
+        document.getElementById('imsg').classList.add('fa-exchange');
+        document.getElementById('msgCustom').classList.remove('boxCliente');
+        transaccion();
+        comprado=true;
+        
+      });
+    });
+
+  
+     
 
     window.onload = (event) => {
       if ( sessionStorage.getItem("islogged") == "true" ){
@@ -906,13 +1003,13 @@
         document.getElementById('loginform').classList.remove("boxCliente");
       }
 
+      
+
       function formatNumber (n) {
                 n = String(n).replace(/\D/g, "");
             return n === '' ? n : Number(n).toLocaleString();
       }
-
-    
-
+  
       let carrito = [];
       let total = 0;
       const envioclp = 1500;
@@ -921,6 +1018,7 @@
       let totalacomprar = 0;
       let totalitem = 0;
       let max = Infinity;
+      
      
       
     //JSON=>Articulos
@@ -979,6 +1077,7 @@
             const DOMtotalitems = document.querySelector('#totalitm');
             const DOMbtncomprar = document.querySelector('#btnRComprar');
             const DOMbotonVaciar = document.querySelector('#boton-vaciar');
+            const DOMbotonVaciarX = document.querySelector('#boton-vaciar-stock');
             const miLocalStorage = window.localStorage;
             
 
@@ -986,6 +1085,17 @@
             
 
             // Funciones
+
+            /**
+             * Revisa la flag comprado
+             */
+            function flagComprado() {
+              if (comprado){
+                document.getElementById('msgCustom').classList.add("boxCliente");
+                document.getElementById('msgCompra').textContent = '';
+                document.getElementById('btnRComprar').classList.remove("boxCliente");
+              }
+            }
 
             /**
             * Dibuja todos los productos a partir de la base de datos. No confundir con el carrito
@@ -1041,6 +1151,8 @@
             */
             function anyadirProductoAlCarrito(evento) {
               let total = 0;
+
+              flagComprado();
 
               const carritoSinDuplicados = [...new Set(carrito)];
               // Cuenta el número de veces que se repite el producto
@@ -1210,6 +1322,7 @@
                     if ( sessionStorage.getItem("islogged") == "true"){
                       DOMbtncomprar.classList.remove("btnagregado");
                       DOMbtncomprar.classList.add("btnagregar", "titleBtn");
+                      DOMbtncomprar.disabled = false;
                     }
                     
                 });
@@ -1282,11 +1395,13 @@
             }
 
             /**
-            * Varia el carrito y vuelve a dibujarlo
+            * Vacia el carrito y vuelve a dibujarlo
             */
             function vaciarCarrito() {
                 // Limpiamos los productos guardados
                 carrito = [];
+
+                flagComprado();
 
                 // Limpiamos los productos del DOM
                 // Vaciamos todo el html
@@ -1298,6 +1413,7 @@
                 if ( sessionStorage.getItem("islogged") == "true" ){
                   DOMbtncomprar.classList.remove("btnagregar", "titleBtn");
                   DOMbtncomprar.classList.add("btnagregado");
+                  DOMbtncomprar.disabled = true;
                 } else {
                   DOMbtncomprar.classList.add("boxCliente");
                 }
@@ -1317,6 +1433,45 @@
 
             }
 
+            /**
+            * Vacia el carrito y descuenta el stock
+            */
+            function vaciarCarritoStock() {
+                // Limpiamos los productos guardados
+                carrito = [];
+
+                // Limpiamos los productos del DOM
+                // Vaciamos todo el html
+                DOMitems.textContent = '';
+                DOMtotal.textContent = '';
+
+                
+                // Desactivamos el botón comprar
+                
+                if ( sessionStorage.getItem("islogged") == "true" ){
+                  DOMbtncomprar.classList.remove("btnagregar", "titleBtn");
+                  DOMbtncomprar.classList.add("btnagregado");
+                  DOMbtncomprar.disabled = true;
+                } else {
+                  DOMbtncomprar.classList.add("boxCliente");
+                }
+               
+                // volmemos a renderizar los productos
+
+                renderizarProductos();
+                
+                // Renderizamos los cambios
+                renderizarCarrito();
+                // volmemos a renderizar los productos
+             
+                calcularTotal();
+                // Borra LocalStorage
+                localStorage.clear();
+                
+
+            }
+
+
             function guardarCarritoEnLocalStorage () {
                 miLocalStorage.setItem('carrito', JSON.stringify(carrito));
             }
@@ -1331,9 +1486,10 @@
 
             // Eventos
             DOMbotonVaciar.addEventListener('click', vaciarCarrito);
+            DOMbotonVaciarX.addEventListener('click', vaciarCarritoStock);
 
             //Inicio
-            
+    
             validarCarrito();
             cargarCarritoDeLocalStorage();
             renderizarProductos();
