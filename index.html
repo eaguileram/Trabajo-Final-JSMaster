@@ -862,8 +862,13 @@
           document.getElementById('img').innerHTML = '<i class="fa fa-smile-o boxicon" aria-hidden="true"></i>';
           document.getElementById('desc').innerHTML = "Compra exitosa";
           resolve(launch_toast());
-         }
-         else
+         } else if ( n == 6 ) {
+          document.getElementById('toast').style.backgroundColor = '#0023ff';
+          document.getElementById('img').style.backgroundColor = '#0023ff';
+          document.getElementById('img').innerHTML = '<i class="fa fa-check-circle boxicon" aria-hidden="true"></i>';
+          document.getElementById('desc').innerHTML = "Restaurado";
+          resolve(launch_toast());
+         } else
             reject('Error de ejecución')
       })
       return p;
@@ -921,38 +926,50 @@
         });
       }
 
-      
-
+      function changeIcon(n){
+        if ( n === 2) {
+          document.getElementById('imsg').classList.remove('fa-exchange', 'fa-spinner', 'fa-pulse', 'fa-3x');
+          document.getElementById('imsg').classList.add('fa-check-circle');
+          document.getElementById('msgCompra').textContent = "Compra Exitosa";
+        } else if ( n === 1 ) {
+          document.getElementById('imsg').classList.remove('fa-check-circle');
+          document.getElementById('imsg').classList.add('fa-spinner', 'fa-pulse', 'fa-3x');
+          document.getElementById('msgCompra').textContent = "Realizando Transacción";
+        }
+      }
+    
 
         let p = new Promise((resolve, reject) => {
             setTimeout(() => {
-                resolve(document.getElementById('msgCompra').textContent = "Realizando Transacción");
-            }, 3 * 100);
+                resolve(changeIcon(1));
+            }, 3 * 1000);
         });
 
-      function changeIcon(){
-        document.getElementById('imsg').classList.remove('fa-exchange');
-        document.getElementById('imsg').classList.add('fa-check-circle');
-        document.getElementById('msgCompra').textContent = "Compra Exitosa";
-      }
+      
 
       function transaccion() {
          
           p.then((result) => {
-              console.log((document.getElementById('msgCompra').textContent = "Realizando Transacción"));
+               
               return new Promise((resolve, reject) => {
                   setTimeout(() => {
-                      resolve(changeIcon());
-                  }, 3 * 1000);
+                      resolve();
+                  }, 0);
               });
           }).then((result) => {
-              console.log(result);
+               
+              return new Promise((resolve, reject) => {
+                  setTimeout(() => {
+                      resolve(changeIcon(2), msgtoasty(5));
+                  }, 3 * 1000);
+              });
+          }).then((result) => { 
               return new Promise((resolve, reject) => {
                   setTimeout(() => {
                       resolve(activarBotones(), DOMbotonVaciarX.click());
-                  }, 0);
+                  }, 2 * 1000 );
               });
-          }).then(result => msgtoasty(5));
+            });
       }
     
 
@@ -984,8 +1001,10 @@
         prevenirActualizar();
         document.getElementById('imsg').classList.add('fa-exchange');
         document.getElementById('msgCustom').classList.remove('boxCliente');
+        changeIcon(1);
         transaccion();
         comprado=true;
+       
         
       });
     });
@@ -1011,6 +1030,7 @@
       }
   
       let carrito = [];
+      let stock = [];
       let total = 0;
       const envioclp = 1500;
       const productoclp = 350;
@@ -1079,6 +1099,9 @@
             const DOMbotonVaciar = document.querySelector('#boton-vaciar');
             const DOMbotonVaciarX = document.querySelector('#boton-vaciar-stock');
             const miLocalStorage = window.localStorage;
+            const miStockStorage = window.localStorage;
+
+            
             
 
             
@@ -1102,6 +1125,9 @@
             */
 
             function renderizarProductos() {
+
+                
+
                 baseDeDatos.forEach((info) => {
                     // Estructura
                     const miNodo = document.createElement('section');
@@ -1123,7 +1149,8 @@
                     // Stock
                     const miNodoStock = document.createElement('p');
                     miNodoStock.classList.add('stock');
-                    miNodoStock.textContent = `${info.stock} unidades disponibles`;
+                    miNodoStock.innerHTML = `<span class="numCart" id="stock-${info.id}">${info.stock}</span> unidades disponibles`;
+                    
                     // Boton 
                     const miNodoBoton = document.createElement('button');
                     miNodoBoton.classList.add('btnCrt', 'btnagregar');
@@ -1144,7 +1171,32 @@
                     miNodo.appendChild(miNodoCardBody);
                     DOMitems.appendChild(miNodo);
                 });
-            }
+                let rendirse = [];
+                let finish = [];
+                if (comprado){
+                  
+                  
+                  
+                  const DOMitem = document.querySelector('#items');
+                  
+                  total = 0;
+                  // console.log("descontar stock ;)");
+                   //obtener el número de stock de un item x
+                   const  obj = JSON.parse(miStockStorage['stock']);
+                   console.log(obj);
+                   for (const key in obj ){ 
+                        let count = obj.reduce(function(n, val) {
+                          return n + (val === obj[key]);
+                        }, 0);
+                          rendirse.push({itemid: [obj[key]] });
+                        }
+                   }
+                  }
+                     
+               
+
+               
+
 
             /**
             * Evento para añadir un producto al carrito de la compra
@@ -1400,8 +1452,8 @@
             function vaciarCarrito() {
                 // Limpiamos los productos guardados
                 carrito = [];
-
-                flagComprado();
+                comprado = false;
+                
 
                 // Limpiamos los productos del DOM
                 // Vaciamos todo el html
@@ -1429,6 +1481,8 @@
                 calcularTotal();
                 // Borra LocalStorage
                 localStorage.clear();
+
+                msgtoasty(6);
                 
 
             }
@@ -1437,9 +1491,12 @@
             * Vacia el carrito y descuenta el stock
             */
             function vaciarCarritoStock() {
+                //guardamos el stock
+                guardarStockEnLocalStorage();
                 // Limpiamos los productos guardados
                 carrito = [];
-
+                flagComprado();
+                
                 // Limpiamos los productos del DOM
                 // Vaciamos todo el html
                 DOMitems.textContent = '';
@@ -1466,14 +1523,28 @@
              
                 calcularTotal();
                 // Borra LocalStorage
-                localStorage.clear();
+               // localStorage.clear();
                 
 
             }
 
 
             function guardarCarritoEnLocalStorage () {
+              
                 miLocalStorage.setItem('carrito', JSON.stringify(carrito));
+            }
+ 
+
+            function guardarStockEnLocalStorage () {
+           
+              
+                  let cloneCarrito = JSON.stringify(carrito);
+                  
+                    miStockStorage.setItem('stock', cloneCarrito);
+                    miLocalStorage.removeItem('carrito');
+
+                  console.log(miStockStorage);
+                
             }
 
             function cargarCarritoDeLocalStorage () {

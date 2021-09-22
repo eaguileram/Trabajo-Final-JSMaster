@@ -132,6 +132,7 @@ Se añade vista esquemática del proyecto, esto es solo a modo de recomendación
         - [x] ~~1.1 vaciado el carrito, mostrar mensaje de compra exitosa~~
         - [x] ~~1.2 Permitir al usuario volver a comprar~~
     - [ ] Stock
+        - [x] ~~2.0 agregar un localStorage de Stock~~
         - [ ] 2.1 descontar stock general del LocalStorage (depende de 1.1)
         - [ ] 2.2 si stock producto es 0, desactivar botón añadir al carrito
           - [ ] 2.3 mostrar mensaje en el botón: sin stock disponible
