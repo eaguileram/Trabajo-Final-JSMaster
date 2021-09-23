@@ -659,7 +659,7 @@
               <i id="iuser" class="fa fa-user boxicon" aria-hidden="true"></i><input id="inuser" type="text" placeholder="nombre">
             </div>
             <div class="boxinput">
-              <i id="ipass" class="fa fa-lock boxicon" aria-hidden="true"></i><input id="inpass" type="password" placeholder="contraseña">
+              <i id="ipass" class="fa fa-lock boxicon" aria-hidden="true"></i><input id="inpass" type="password" placeholder="contraseña" autocomplete="off">
             </div>
             <input type="button" class="btnagregar titleBtn" id="submit" value="Iniciar Sesión"> 
           </form>
@@ -1121,46 +1121,138 @@
             }
 
             /**
+             * sobrescribe el Stock del DOM usando como base el Stock del LS 
+             */
+
+            function recorreStock() { 
+
+              //si hay una compra realizada, entonces esto correrá
+
+              if (comprado) { 
+
+              //este total lo usaremos para almacenar las veces que se repite el stock del LS 
+              total = 0;
+
+              //obtenemos sólo los valores desde el LS
+              const  obj = JSON.parse(miStockStorage['stock']);
+
+              //ahora generamos un nuevo Stock sin Duplicados
+              const stockSinDuplicados = [...new Set(obj)];
+
+              // Recorremos uno a uno cada item del nuevo Stock
+              stockSinDuplicados.forEach((item) => {
+                
+              // Cuenta el número de veces que se repite el item
+              const numeroUnidadesItem = obj.reduce((total, itemId) => {
+                
+                  // ¿Coinciden las id? entonces decremento el contador, en caso contrario lo mantengo
+                  //itemId es obtenido del objeto que almacena el current StockLS
+                  //item  es el id que estamos comparando
+                  //total es un valor previamente establecimos en valor 0
+                  //Si coinciden los ID de los ítem, entonces disminuye 1, lo cual dará un número negativo al final
+                  if (itemId === item) {
+                    total -= 1; 
+                    return total;
+                  }else{
+                    return total;
+                  } 
+                }, 0);
+                
+       
+                //definimos nuestro prefijo
+                const prefijo = "stock-";
+                
+                //concatenamos con el id del item que estamos usando
+                const idDOM = prefijo.concat(item);
+                
+                //leemos el stock disponible del elemento
+                let DOMstock = document.getElementById(idDOM).textContent;
+
+                // nuevo code START
+                //realizamos una comparación estricta para saber si son iguales los valores
+                    
+                    // if ( Number(max) === Number(DOMstock) ) {
+                      //en caso de ser iguales definimos el stock máximo del JSON
+                      // max;
+                    // } else {
+                      //en caso contrario seteamos el nuevo valor máximo por medio de una resta
+                      // max = Number(max) - Number(DOMstock); 
+                    // }
+                // nuevo code END
+                
+                //realizamos la operación matemática de restar, pero primero nos aseguramos de estar trabajando con valores númericos
+                //usamos un objeto primitivo, Number
+
+                let nuevoStock = Number(DOMstock) + Number(numeroUnidadesItem);
+
+                  //escribimos el nuevo valor del stock en el DOM
+                  document.getElementById(idDOM).textContent = nuevoStock;
+                  console.log(nuevoStock);
+
+                })
+              }
+
+              }
+
+            /**
             * Dibuja todos los productos a partir de la base de datos. No confundir con el carrito
+            * Cuando presiono F5 sigue apareciendo el valor del JSONN en unidades disponibles, debería saler el valor de la restar entre db.stock - ls.stock
+            * El LS stock si se mantienen en Application
             */
 
             function renderizarProductos() {
-
                 
+           
+                
+                //tomamos los datos desde el JSON y dibujamos el DOM de productos
 
                 baseDeDatos.forEach((info) => {
                     // Estructura
                     const miNodo = document.createElement('section');
                     miNodo.classList.add('producto');
+                    
                     // Body
                     const miNodoCardBody = document.createElement('figure');
                     
                     // Titulo
                     const miNodoTitle = document.createElement('figcaption');
+
                     // miNodoTitle.classList.add('card-title');
                     miNodoTitle.textContent = info.titulo;
+                    
                     // Imagen
                     const miNodoImagen = document.createElement('img');
                     miNodoImagen.setAttribute('src', info.imagen);
+                    
                     // Precio
                     const miNodoPrecio = document.createElement('span');
                     miNodoPrecio.classList.add('precio');
                     miNodoPrecio.textContent = `$ ${formatNumber(info.precio)}`;
+                    
                     // Stock
                     const miNodoStock = document.createElement('p');
                     miNodoStock.classList.add('stock');
+                    
                     miNodoStock.innerHTML = `<span class="numCart" id="stock-${info.id}">${info.stock}</span> unidades disponibles`;
                     
                     // Boton 
                     const miNodoBoton = document.createElement('button');
                     miNodoBoton.classList.add('btnCrt', 'btnagregar');
+
+                    // consultamos si hay un proceso de compra, en caso de ser positivo, desactivamos los botones por prevención
+                    if (comprado ) {
+                      miNodoBoton.setAttribute.disabled = true;
+                    }
                     miNodoBoton.textContent = 'Añadir al carrito';
                     miNodoBoton.setAttribute('marcador', info.id);
+
                     // Unidades disponibles
                     const miNodoDisponibles = document.createElement('p');
                     miNodoDisponibles.classList.add('encarrito');
                     miNodoDisponibles.innerHTML = `Tiene <span class="numCart" id="art-${info.id}"><b>0</b></span> unidades en el carrito de compras`;
                     miNodoBoton.addEventListener('click', anyadirProductoAlCarrito);
+
+
                     // Insertamos
                     miNodoCardBody.appendChild(miNodoImagen);
                     miNodoCardBody.appendChild(miNodoTitle);
@@ -1171,42 +1263,28 @@
                     miNodo.appendChild(miNodoCardBody);
                     DOMitems.appendChild(miNodo);
                 });
-                let rendirse = [];
-                let finish = [];
-                if (comprado){
-                  
-                  
-                  
-                  const DOMitem = document.querySelector('#items');
-                  
-                  total = 0;
-                  // console.log("descontar stock ;)");
-                   //obtener el número de stock de un item x
-                   const  obj = JSON.parse(miStockStorage['stock']);
-                   console.log(obj);
-                   for (const key in obj ){ 
-                        let count = obj.reduce(function(n, val) {
-                          return n + (val === obj[key]);
-                        }, 0);
-                          rendirse.push({itemid: [obj[key]] });
-                        }
-                   }
-                  }
-                     
-               
+                
+                    //Buscamos en nuestro StockLocalStorage los descuentos de Stock y recorreremos el DOM Productos para establecer el nuevo Stock disponible
+                    try {
+                      recorreStock();  
+                      } catch (error) {
+                      console.log(error)
+                      }
 
-               
+                }
 
-
+             
             /**
             * Evento para añadir un producto al carrito de la compra
             */
             function anyadirProductoAlCarrito(evento) {
               let total = 0;
 
+              //establecemos las clases CSS, mientras sucede esta operación
               flagComprado();
 
               const carritoSinDuplicados = [...new Set(carrito)];
+
               // Cuenta el número de veces que se repite el producto
               const numeroUnidadesItem = carrito.reduce((total, itemId) => {
                       
@@ -1214,8 +1292,10 @@
 
                       // Obtenemos stock del item
                     let itemStock = [];
+
                      // Obtenemos el item que necesitamos de la variable base de datos
                      const miItemStock = baseDeDatos.filter((itemBaseDatos) => {
+
                         // ¿Coincide las id? Solo puede existir un caso
                        if ( itemBaseDatos.id === parseInt(itemId)){
                          itemStock = itemBaseDatos.stock;
@@ -1228,6 +1308,7 @@
                     let isJson = JSON.stringify(miItemStock);
                     let obj = JSON.parse(isJson);
 
+                    //usamos la siguiente función para obtener el máximo de unidades disponibles desde el JSON
                     function printValues(obj) {
                         for(var k in obj) {
                             if(obj[k] instanceof Object) {
@@ -1240,10 +1321,36 @@
                         }
                     };
 
+                    //traemos el valor actual de unidades disponibles desde el DOM, y comparamos
+                    // Si son iguales, entonces se toma como valor máximo el obtenido del JSON
+                    // En caso contrario, restamos  el stock de la DB con el stock del DOM y así obtenemos el nuevo valor máximo de stock disponible
+                    //debemos asegurarnos de establecer el stock en el DOM después de comprar y luego volvemos acá
+                    //valor del Stock inicial del JSON
                     max = printValues(obj);
-                     
-                      
-                      if (itemId === evento.target.getAttribute('marcador') && total < printValues(obj)) {
+
+                    //obtenemos el valor del stock del DOM
+                    //definimos nuestro prefijo
+                    const prefijo = "stock-";
+                    
+                    //concatenamos con el id del item que estamos usando en el DOM
+                    const idDOM = prefijo.concat(itemId);
+                    
+                    //leemos el stock disponible del elemento
+                    let DOMstock = document.getElementById(idDOM).textContent;
+                    
+
+
+                    //realizamos una comparación estricta para saber si son iguales los valores
+                    
+                    if ( Number(max) === Number(DOMstock) ) {
+                      //en caso de ser iguales definimos el stock máximo del JSON
+                      max;
+                    } else {
+                      //en caso contrario seteamos el nuevo valor máximo por medio de una resta
+                      max = Number(max) - Number(DOMstock); 
+                    }
+                    
+                      if (itemId === evento.target.getAttribute('marcador') && total < max) {
                         total += 1; 
                         return total;
                       }else{
@@ -1253,7 +1360,7 @@
 
              
               
-              // Anyadimos el Nodo a nuestro carrito
+              // Añadimos el Nodo a nuestro carrito
 
               if ( numeroUnidadesItem < max) {
               
@@ -1285,7 +1392,7 @@
                 carritoSinDuplicados.forEach((item) => {
                     // Obtenemos el item que necesitamos de la variable base de datos
                     const miItem = baseDeDatos.filter((itemBaseDatos) => {
-                        // ¿Coincide las id? Solo puede existir un caso
+                        // ¿Coinciden las id? Solo puede existir un caso
                        
                         return itemBaseDatos.id === parseInt(item);
                     });
@@ -1322,10 +1429,9 @@
                     // Cuenta el número de veces que se repite el producto
                     const numeroUnidadesItem = carrito.reduce((total, itemId, itemStock) => {
                       
-                        // ¿Coincide las id? Incremento el contador, en caso contrario no mantengo
-                      
+                    // ¿Coincide las id? Incremento el contador, en caso contrario lo mantengo
                         
-                        if (itemId === item && total < printValues(obj)) {
+                    if (itemId === item && total < printValues(obj)) {
                           total += 1; 
                           return total;
                         }else{
@@ -1333,11 +1439,6 @@
                         } 
                     }, 0);
 
-                    
-
-
-                
-             
                     let multiplicar = numeroUnidadesItem * miItem[0].precio;
                     
                     // Creamos el nodo del item del carrito
@@ -1543,8 +1644,6 @@
                     miStockStorage.setItem('stock', cloneCarrito);
                     miLocalStorage.removeItem('carrito');
 
-                  console.log(miStockStorage);
-                
             }
 
             function cargarCarritoDeLocalStorage () {
@@ -1566,6 +1665,8 @@
             renderizarProductos();
             calcularTotal();
             renderizarCarrito();
+            recorreStock();
+            
 
       
     };
