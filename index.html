@@ -52,7 +52,7 @@
         grid-area: sidebar-2;
         background-color: #dedede;
         padding: 1em;
-        
+        height: 100vh;        
       }
 
       .producto{
@@ -82,6 +82,13 @@
       figcaption{
         text-transform: uppercase;
         font-weight: 500;
+      }
+
+      .escala-grises {
+        filter: grayscale(1);
+        opacity: .6;
+        -webkit-transition: all .3s;
+        transition: all .3s;
       }
 
       .precio{
@@ -1055,41 +1062,40 @@
                     titulo: 'Silla Gamer Color Celeste',
                     precio: 169900,
                     imagen: 'img/s2.jpg',
-                    stock: 3
+                    stock: 2
                 },
                 {
                     id: 3,
                     titulo: 'Silla Gamer Color Rosada',
                     precio: 134900,
                     imagen: 'img/s3.jpg',
-                    stock: 4
+                    stock: 2
                 },
                 {
                     id: 4,
                     titulo: 'Silla Gamer Color Blanca',
                     precio: 159900,
                     imagen: 'img/s4.jpg',
-                    stock: 5
+                    stock: 2
                 },
                 {
                     id: 5,
                     titulo: 'Silla Gamer Color Azul',
                     precio: 149900,
                     imagen: 'img/s5.jpg',
-                    stock: 5
+                    stock: 2
                 },
                 {
                     id: 6,
                     titulo: 'Silla Gamer Color Verde',
                     precio: 119900,
                     imagen: 'img/s6.jpg',
-                    stock: 5
+                    stock: 2
                 }
 
             ];
 
             const DOMitems = document.querySelector('#items');
-            
             const DOMcarrito = document.querySelector('#carrito');
             const DOMtotal = document.querySelector('#totalArticulos');
             const DOMcostoenvio = document.querySelector('#costoenv');
@@ -1098,14 +1104,9 @@
             const DOMbtncomprar = document.querySelector('#btnRComprar');
             const DOMbotonVaciar = document.querySelector('#boton-vaciar');
             const DOMbotonVaciarX = document.querySelector('#boton-vaciar-stock');
+            const DOMbotonRecargarStock = document.querySelector('#boton-recargar-stock');
             const miLocalStorage = window.localStorage;
             const miStockStorage = window.localStorage;
-
-            
-            
-
-            
-            
 
             // Funciones
 
@@ -1121,16 +1122,15 @@
             }
 
             /**
-             * sobrescribe el Stock del DOM usando como base el Stock del LS 
+             * sobrescribe el Stock del DOM usando como base el Stock del LS
              */
 
-            function recorreStock() { 
+            function recorreStock() {
 
               //si hay una compra realizada, entonces esto correrá
+              if (miStockStorage.length > 0 ) {
 
-              if (comprado) { 
-
-              //este total lo usaremos para almacenar las veces que se repite el stock del LS 
+              //este total lo usaremos para almacenar las veces que se repite el stock del LS
               total = 0;
 
               //obtenemos sólo los valores desde el LS
@@ -1138,60 +1138,101 @@
 
               //ahora generamos un nuevo Stock sin Duplicados
               const stockSinDuplicados = [...new Set(obj)];
+              
 
               // Recorremos uno a uno cada item del nuevo Stock
               stockSinDuplicados.forEach((item) => {
-                
+
               // Cuenta el número de veces que se repite el item
               const numeroUnidadesItem = obj.reduce((total, itemId) => {
-                
+
                   // ¿Coinciden las id? entonces decremento el contador, en caso contrario lo mantengo
                   //itemId es obtenido del objeto que almacena el current StockLS
                   //item  es el id que estamos comparando
                   //total es un valor previamente establecimos en valor 0
                   //Si coinciden los ID de los ítem, entonces disminuye 1, lo cual dará un número negativo al final
                   if (itemId === item) {
-                    total -= 1; 
+                    total -= 1;
                     return total;
                   }else{
+                    
                     return total;
-                  } 
+                  }
                 }, 0);
-                
-       
+
                 //definimos nuestro prefijo
                 const prefijo = "stock-";
-                
+
                 //concatenamos con el id del item que estamos usando
                 const idDOM = prefijo.concat(item);
-                
+
                 //leemos el stock disponible del elemento
                 let DOMstock = document.getElementById(idDOM).textContent;
 
-                // nuevo code START
-                //realizamos una comparación estricta para saber si son iguales los valores
-                    
-                    // if ( Number(max) === Number(DOMstock) ) {
-                      //en caso de ser iguales definimos el stock máximo del JSON
-                      // max;
-                    // } else {
-                      //en caso contrario seteamos el nuevo valor máximo por medio de una resta
-                      // max = Number(max) - Number(DOMstock); 
-                    // }
-                // nuevo code END
-                
+                let nuevoStock = 0;
                 //realizamos la operación matemática de restar, pero primero nos aseguramos de estar trabajando con valores númericos
                 //usamos un objeto primitivo, Number
+                //aplicar filter a la DB para encontrar el stock del item
 
-                let nuevoStock = Number(DOMstock) + Number(numeroUnidadesItem);
+                let itemStock = [];
+               
+                // Obtenemos el item que necesitamos de la variable base de datos
+                const miItemStock = baseDeDatos.filter((itemBaseDatos) => {
+                  // ¿Coincide las id? Solo puede existir un caso
+                  if ( itemBaseDatos.id === parseInt(item)){
+                  itemStock = JSON.parse(itemBaseDatos.stock);
+                  return itemStock;
+                  }
+                  });
+               
 
+                  
+
+                if ( Number(itemStock) === Number(DOMstock) ) {
+                  nuevoStock = Number(DOMstock) + Number(numeroUnidadesItem);
+                } else if ( Number(itemStock) > Number(numeroUnidadesItem)) {
+                  setTimeout(() => {
+                    nuevoStock = Number(numeroUnidadesItem) + Number(DOMstock);
+                    console.log(`unidades a descontar ${Number(numeroUnidadesItem)} del dom que vale ${Number(DOMstock)}`);  
+                  }, 300);
+                  
+                }
+                //console.log(`nuevo stock: ${nuevoStock}`);
                   //escribimos el nuevo valor del stock en el DOM
                   document.getElementById(idDOM).textContent = nuevoStock;
-                  console.log(nuevoStock);
+                  //si el nuevo Stock es 0, desactivamos el botón de añadir al carrito
+                  
+                  if (Number(nuevoStock) === 0) {
+                     //Modificar Botón
+                     //definimos nuestro prefijo
+                    const prefijoid = "item-";
+                    //concatenamos con el id del item que estamos usando en el DOM
+                    const idSection = prefijoid.concat(item);
+
+                    //obtenemos el elemento
+                    let x = document.querySelector(`#${idSection}`);
+                    //desactivamos el botón
+                    x.disabled = true;
+                    //cambiamos el texto del botón para avisar sin stock
+                    x.textContent = "Sin Stock";
+                    //remnovemos y agregamos la clase que muestra el botón sin color azul
+                    x.classList.remove('btnagregar');
+                    x.classList.add('btnagregado', 'titleBtn');
+
+                    //Modificar Imagen
+                    //definimos nuestro prefijo
+                    const prefijoimg = "img-";
+                    //concatenamos con el id del item
+                    const idimg = prefijoimg.concat(item);
+                    //obtenemos el elemento
+                    let i = document.querySelector(`#${idimg}`);
+                    //seteamos la clase de escala de grises
+                    i.classList.add('escala-grises');
+                  }
 
                 })
               }
-
+              
               }
 
             /**
@@ -1201,50 +1242,52 @@
             */
 
             function renderizarProductos() {
+
+                function recorreDB(){
                 
-           
-                
-                //tomamos los datos desde el JSON y dibujamos el DOM de productos
 
                 baseDeDatos.forEach((info) => {
                     // Estructura
                     const miNodo = document.createElement('section');
                     miNodo.classList.add('producto');
-                    
+
                     // Body
                     const miNodoCardBody = document.createElement('figure');
-                    
+
                     // Titulo
                     const miNodoTitle = document.createElement('figcaption');
 
                     // miNodoTitle.classList.add('card-title');
                     miNodoTitle.textContent = info.titulo;
-                    
+
                     // Imagen
                     const miNodoImagen = document.createElement('img');
                     miNodoImagen.setAttribute('src', info.imagen);
-                    
+                    miNodoImagen.setAttribute('id', `img-${info.id}`);
+
                     // Precio
                     const miNodoPrecio = document.createElement('span');
                     miNodoPrecio.classList.add('precio');
                     miNodoPrecio.textContent = `$ ${formatNumber(info.precio)}`;
-                    
+
                     // Stock
+                    
                     const miNodoStock = document.createElement('p');
                     miNodoStock.classList.add('stock');
-                    
                     miNodoStock.innerHTML = `<span class="numCart" id="stock-${info.id}">${info.stock}</span> unidades disponibles`;
                     
-                    // Boton 
+
+                    // Boton
                     const miNodoBoton = document.createElement('button');
                     miNodoBoton.classList.add('btnCrt', 'btnagregar');
 
                     // consultamos si hay un proceso de compra, en caso de ser positivo, desactivamos los botones por prevención
-                    if (comprado ) {
+                    if ( comprado ) {
                       miNodoBoton.setAttribute.disabled = true;
                     }
                     miNodoBoton.textContent = 'Añadir al carrito';
                     miNodoBoton.setAttribute('marcador', info.id);
+                    miNodoBoton.setAttribute('id', `item-${info.id}`);
 
                     // Unidades disponibles
                     const miNodoDisponibles = document.createElement('p');
@@ -1262,18 +1305,21 @@
                     miNodoCardBody.appendChild(miNodoDisponibles);
                     miNodo.appendChild(miNodoCardBody);
                     DOMitems.appendChild(miNodo);
+                    
                 });
-                
-                    //Buscamos en nuestro StockLocalStorage los descuentos de Stock y recorreremos el DOM Productos para establecer el nuevo Stock disponible
-                    try {
-                      recorreStock();  
-                      } catch (error) {
-                      console.log(error)
-                      }
+               }
+               const recorrerJSON = new Promise((resolve, reject) => {
+                  setTimeout(() => {
+                    resolve(recorreDB());
+                  }, 0);
+               });
+              if(miStockStorage.length != 0){               
+               recorrerJSON.then(setTimeout(() => {
+                 recorreStock();
+               }, 300));
+              }
+            }
 
-                }
-
-             
             /**
             * Evento para añadir un producto al carrito de la compra
             */
@@ -1287,7 +1333,7 @@
 
               // Cuenta el número de veces que se repite el producto
               const numeroUnidadesItem = carrito.reduce((total, itemId) => {
-                      
+
                       // ¿Coincide las id? Incremento el contador, en caso contrario no mantengo
 
                       // Obtenemos stock del item
@@ -1301,7 +1347,6 @@
                          itemStock = itemBaseDatos.stock;
                          return itemStock;
                        }
-                        
                     });
 
 
@@ -1331,51 +1376,52 @@
                     //obtenemos el valor del stock del DOM
                     //definimos nuestro prefijo
                     const prefijo = "stock-";
-                    
+
                     //concatenamos con el id del item que estamos usando en el DOM
                     const idDOM = prefijo.concat(itemId);
-                    
+
                     //leemos el stock disponible del elemento
                     let DOMstock = document.getElementById(idDOM).textContent;
-                    
+
 
 
                     //realizamos una comparación estricta para saber si son iguales los valores
-                    
+
                     if ( Number(max) === Number(DOMstock) ) {
                       //en caso de ser iguales definimos el stock máximo del JSON
                       max;
                     } else {
                       //en caso contrario seteamos el nuevo valor máximo por medio de una resta
-                      max = Number(max) - Number(DOMstock); 
+                      max = Number(max) - Number(DOMstock);
                     }
+
                     
+
                       if (itemId === evento.target.getAttribute('marcador') && total < max) {
-                        total += 1; 
+                        total += 1;
                         return total;
                       }else{
                         return total;
-                      } 
+                      }
                   }, 0);
 
-             
-              
+
               // Añadimos el Nodo a nuestro carrito
 
               if ( numeroUnidadesItem < max) {
-              
+
                 carrito.push(evento.target.getAttribute('marcador'));
                 msgtoasty(0);
 
                 // Calculo el total
                 calcularTotal();
-                // Actualizamos el carrito 
+                // Actualizamos el carrito
                 renderizarCarrito();
                 // Actualizamos el LocalStorage
                 guardarCarritoEnLocalStorage();
               }else{
                 msgtoasty(4);
-                // Actualizamos el carrito 
+                // Actualizamos el carrito
                 renderizarCarrito();
               }
             }
@@ -1393,7 +1439,7 @@
                     // Obtenemos el item que necesitamos de la variable base de datos
                     const miItem = baseDeDatos.filter((itemBaseDatos) => {
                         // ¿Coinciden las id? Solo puede existir un caso
-                       
+
                         return itemBaseDatos.id === parseInt(item);
                     });
 
@@ -1406,7 +1452,7 @@
                          itemStock = itemBaseDatos.stock;
                          return itemStock;
                        }
-                        
+
                     });
 
 
@@ -1424,27 +1470,26 @@
                             };
                         }
                     };
-               
-                 
+
                     // Cuenta el número de veces que se repite el producto
                     const numeroUnidadesItem = carrito.reduce((total, itemId, itemStock) => {
-                      
+
                     // ¿Coincide las id? Incremento el contador, en caso contrario lo mantengo
-                        
+
                     if (itemId === item && total < printValues(obj)) {
-                          total += 1; 
+                          total += 1;
                           return total;
                         }else{
                           return total;
-                        } 
+                        }
                     }, 0);
 
                     let multiplicar = numeroUnidadesItem * miItem[0].precio;
-                    
+
                     // Creamos el nodo del item del carrito
                     const miNodo = document.createElement('li');
                     miNodo.classList.add("userbox");
-                    
+
                     miNodo.innerHTML = `<div class="asideboxArticulo userbox">
                             <div class="avatarcart">
                               <img src="${miItem[0].imagen}" data-demo-src="${miItem[0].imagen}" alt="">
@@ -1453,15 +1498,15 @@
                                 <span>${miItem[0].titulo}</span>
                                 <span>$ ${formatNumber(miItem[0].precio)}</span>
                                 <span>${numeroUnidadesItem} unidades</span>
-                                <span>Total $ ${formatNumber(multiplicar)}  </span>  
+                                <span>Total $ ${formatNumber(multiplicar)}  </span>
                             </div>
                     </div>`;
-                    
+
                     let id = `art-${miItem[0].id}`;
                     let encarrito = document.getElementById(id);
                     encarrito.textContent = numeroUnidadesItem;
 
-                  
+
                     // Boton de borrar
                     const miBoton = document.createElement('button');
                     miBoton.classList.add("rock");
@@ -1470,14 +1515,12 @@
                    // Mezclamos nodos
                     miNodo.appendChild(miBoton);
                     DOMcarrito.appendChild(miNodo);
-                  
-                  
+
                     if ( sessionStorage.getItem("islogged") == "true"){
                       DOMbtncomprar.classList.remove("btnagregado");
                       DOMbtncomprar.classList.add("btnagregar", "titleBtn");
                       DOMbtncomprar.disabled = false;
                     }
-                    
                 });
             }
 
@@ -1492,7 +1535,8 @@
                     return carritoId !== id;
                 });
 
-                
+                // limpiamos productos
+                DOMitems.textContent = '';
                 // volmemos a renderizar los productos
                 renderizarProductos();
 
@@ -1504,7 +1548,7 @@
                 guardarCarritoEnLocalStorage();
                 validarCarrito();
 
-                
+
 
             }
 
@@ -1516,53 +1560,51 @@
                 total = 0;
                 totalacomprar = 0;
                 totalitem = 0;
-                
+
                 // Recorremos el array del carrito
 
-                carrito.forEach((item) => {   
-                  
+                carrito.forEach((item) => {
+
                     // De cada elemento obtenemos su precio
                     const miItem = baseDeDatos.filter((itemBaseDatos) => {
                         return itemBaseDatos.id === parseInt(item);
                     });
-                   
+
                       total = total + miItem[0].precio;
-                   
+
                 });
 
-                 
+
                 if ( carrito.length == 0 ) {
                   envclp = 0;
                 } else {
                   envclp = envioclp + (productoclp * carrito.length);
                   totalacomprar = envclp + total;
                 }
- 
+
                 // Renderizamos el precio en el HTML
                 DOMtotal.textContent = `$${formatNumber(total.toFixed(0))}`;
                 DOMcostoenvio.textContent = `$${formatNumber(envclp.toFixed(0))}`;
                 DOMtotalcompra.textContent = `$${formatNumber(totalacomprar.toFixed(0))}`;
                 DOMtotalitems.textContent = carrito.length;
-                
-
             }
 
             /**
             * Vacia el carrito y vuelve a dibujarlo
             */
             function vaciarCarrito() {
-                // Limpiamos los productos guardados
+              //usamos una función que limpiará los productos del DOM
+              function  limpiarTodo() {
+              // Limpiamos los productos guardados
                 carrito = [];
                 comprado = false;
-                
 
                 // Limpiamos los productos del DOM
                 // Vaciamos todo el html
                 DOMitems.textContent = '';
 
-                
+
                 // Desactivamos el botón comprar
-                
                 if ( sessionStorage.getItem("islogged") == "true" ){
                   DOMbtncomprar.classList.remove("btnagregar", "titleBtn");
                   DOMbtncomprar.classList.add("btnagregado");
@@ -1570,21 +1612,28 @@
                 } else {
                   DOMbtncomprar.classList.add("boxCliente");
                 }
-               
-                // volmemos a renderizar los productos
 
-                renderizarProductos();
+                //ejecutamos en orden las siguientes funciones
+                const render = new Promise((resolve, reject) => { 
+                  setTimeout(() => {
+                    // volmemos a renderizar los productos
+                    resolve(renderizarProductos());
+                  }, 300);
+                });
+                // Renderizamos los cambios en el carrito y calculamos, limpiamos el localStorage y enviamos un msg
+                render.then(renderizarCarrito()).then(calcularTotal()).then(localStorage.clear()).then(msgtoasty(6));
                 
-                // Renderizamos los cambios
-                renderizarCarrito();
-                // volmemos a renderizar los productos
-             
-                calcularTotal();
-                // Borra LocalStorage
-                localStorage.clear();
+              }
+              //generamos una promesa que limpiará todos los productos del DOM
+              const limpiar = new Promise((resolve, reject) => {
+                setTimeout(() => {
+                  resolve(limpiarTodo());
+                }, 300);
+              });
+              //después que termine lo anterior, limpiamos el carrito
+              limpiar.then(vaciarCarritoStock());
+              
 
-                msgtoasty(6);
-                
 
             }
 
@@ -1617,30 +1666,27 @@
                 // volmemos a renderizar los productos
 
                 renderizarProductos();
-                
+
                 // Renderizamos los cambios
                 renderizarCarrito();
                 // volmemos a renderizar los productos
-             
                 calcularTotal();
                 // Borra LocalStorage
                // localStorage.clear();
-                
-
             }
 
 
             function guardarCarritoEnLocalStorage () {
-              
+
                 miLocalStorage.setItem('carrito', JSON.stringify(carrito));
             }
- 
+
 
             function guardarStockEnLocalStorage () {
-           
-              
+
+
                   let cloneCarrito = JSON.stringify(carrito);
-                  
+
                     miStockStorage.setItem('stock', cloneCarrito);
                     miLocalStorage.removeItem('carrito');
 
@@ -1657,21 +1703,18 @@
             // Eventos
             DOMbotonVaciar.addEventListener('click', vaciarCarrito);
             DOMbotonVaciarX.addEventListener('click', vaciarCarritoStock);
+            //debemos agregar un evento que ejecute recorreStock
+            
 
             //Inicio
-    
-            validarCarrito();
+
+            validarCarrito();1
             cargarCarritoDeLocalStorage();
             renderizarProductos();
             calcularTotal();
             renderizarCarrito();
-            recorreStock();
-            
+           };
 
-      
-    };
-
-  
    </script>
 </body>
 </html>
