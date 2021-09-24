@@ -23,7 +23,7 @@ Se debe realizar en modo SPA (Single Page Application) una tienda de comercio el
 ~~Al realizar la compra, se debe simular una petición asíncrona que se demore 3 segundos en responder.~~<br />
 ~~Se debe notificar al usuario que la compra está siendo realizada, mientras esto sucede, el usuario no debe ser capaz de añadir nuevos productos ni realizar otra compra.~~<br />
 ~~Cuando se realiza la compra, el carro de compra debe ser vaciado y mostrar un mensaje de compra exitosa, pero permitiendo que el usuario sea capaz de volver a realizar una compra.~~<br />
-El descuento de productos del stock general debe realizarse una vez realizada la compra<br />
+~~El descuento de productos del stock general debe realizarse una vez realizada la compra.~~<br />
 ~~Se debe añadir un botón al pie que permita restaurar los valores por defecto de la cantidad de productos.~~<br /><br />
 
 
